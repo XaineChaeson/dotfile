@@ -64,7 +64,7 @@ ensure_source() {
     return
   fi
 
-  if ! rg -qF "$line" "$rc"; then
+  if ! grep -Fq "$line" "$rc"; then
     printf '\n%s\n' "$line" >>"$rc"
     printf 'ADD  %s\n' "$rc"
   else
