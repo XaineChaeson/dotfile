@@ -17,7 +17,8 @@ alias gl='git log --oneline --graph --decorate'
 ##### tmux 高频 #####
 alias t='tmux'
 alias tls='tmux ls'
-alias ta='tmux attach -t'
+alias ta='tmux attach'
+alias tat='tmux attach -t'
 
 ##### 目录跳转 #####
 alias ..='cd ..'
