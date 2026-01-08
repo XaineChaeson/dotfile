@@ -35,6 +35,7 @@ Use this page for a compact, user-facing scan of core entrypoints. Keep detailed
 - Required config:
 - Defaults:
 - Common pitfalls:
+ - Full config reference: link to `docs/dev/config.md` or `docs/dev/config/`.
 
 ## API Overview Table
 

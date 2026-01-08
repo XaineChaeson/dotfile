@@ -61,6 +61,12 @@ Heuristic only (not strict): use counts to support judgment.
 - Put strict interface IO contracts in dev/contracts.
 - Keep user-facing API pages as a short "API overview" only.
 - Keep parameters and IO specs only in dev/interfaces; user docs link instead of repeating.
+- Maintain full config parameters in a dedicated dev config doc (`docs/dev/config.md` or `docs/dev/config/`) when any of the following apply:
+  - Config parameters > 8–10.
+  - Config is shared across multiple modules/services.
+  - Config changes are frequent or impact behavior materially.
+  - Multiple environments or profiles require different defaults.
+- For small/simple configs, an interface doc may include config details, but still keep a single source of truth.
 - Add adapter delta docs for instance-specific deviations when needed.
 
 ### 7) Align with code
@@ -107,6 +113,7 @@ Heuristic only (not strict): use counts to support judgment.
 - references/dev-index-template.md
 - references/interface-index-template.md
 - references/ops-handoff-template.md
+- references/config-reference-template.md
 - references/reference-glossary-template.md
 - references/reference-conventions-template.md
 - references/reference-structure-template.md
