@@ -7,4 +7,8 @@
 - Examples are runnable or explicitly marked as pseudocode.
 - Architecture diagrams align with current modules.
 - Module docs reflect actual boundaries and responsibilities.
+- User docs link to dev interfaces instead of repeating IO details.
+- Scenario index aligns with API overview table.
 - Change log or devlog updated when public behavior changes.
+- Glossary/term usage is consistent across user and dev docs.
+- Versioning and stability labels are present where required.

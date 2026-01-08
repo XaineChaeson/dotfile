@@ -1,7 +1,5 @@
 # Capability Overview Table
 
-Use this when interfaces are large in number.
+Merged into the API Overview Table in `references/api-config-template.md`. Do not maintain a separate capability table.
 
-| Capability | Module | Entrypoint | Key functions | Typical example |
-|-----------|--------|------------|---------------|----------------|
-|           |        |            |               |                |
+Use the API Overview Table for both "what can this system do" and "how do I call it" scanning.

@@ -1,31 +1,48 @@
-# Interface Reference: <name>
+# API / Config Overview (User)
 
-## Summary
-- Goal:
-- Use cases:
-- Entrypoint: `module.Class.method`
+Use this page for a compact, user-facing scan of core entrypoints. Keep detailed IO specs in `docs/dev/interfaces/`.
 
-## Usage
-```python
-# minimal example
+## Purpose
+- Primary goals:
+- Who this is for:
+
+## Quickstart
+```bash
+<short runnable example>
 ```
 
-## Parameters
-| Name | Type | Required | Default | Description | Constraints |
-|------|------|----------|---------|-------------|-------------|
-|      |      |          |         |             |             |
+## Core Entry Points
 
-## Returns
-- Structure:
-- Fields:
-- Example:
+### <capability>
+- Entrypoint: `<module.Class.method or cli subcommand>`
+- When to use:
+- Minimal example:
+```bash
+<short runnable example>
+```
+- Key parameters: `<param>`, `<param>`, `<param>`
 
-## Errors
-- Error type/code:
-- Trigger:
-- Handling:
+### <capability>
+- Entrypoint: `<module.Class.method or cli subcommand>`
+- When to use:
+- Minimal example:
+```bash
+<short runnable example>
+```
+- Key parameters: `<param>`, `<param>`, `<param>`
 
-## Notes
-- Related interfaces:
-- Related configs:
-- Change notes:
+## Config Overview
+- Required config:
+- Defaults:
+- Common pitfalls:
+
+## API Overview Table
+
+Use this as a quick scan of available entrypoints. Keep it brief and link to the full interface pages.
+
+| Capability | Entrypoint | When to use | Key params | Example | Notes |
+|------------|------------|-------------|------------|---------|-------|
+|            |            |             |            |         |       |
+
+## Related Docs
+- `docs/dev/interfaces/`: full interface references

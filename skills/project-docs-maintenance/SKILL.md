@@ -9,6 +9,8 @@ description: Build, update, or rewrite project documentation to reflect current 
 - Prioritize user speed: make it easy to locate usage and examples fast.
 - Prioritize developer precision: define boundaries, decisions, and contracts.
 - Keep docs aligned to code; do not run automation.
+- Minimize duplication: a single source of truth with links elsewhere.
+- Default to recommendations unless the user explicitly requests template edits or doc changes.
 
 ## Workflow
 
@@ -21,12 +23,19 @@ Score each dimension as Low/Med/High based on current repo state:
 - Roles: user types (user/dev/ops) and their needs.
 
 Pick scope:
-- S (small): README + Quickstart + API/Config page + short architecture summary.
-- M (medium): S + docs/INDEX + module docs + runbook/ops + changelog/devlog.
-- L (large): M + PRD/contracts + design/mechanism docs + layered indexes + overview tables.
+- S (small): README + docs/user (index/quickstart/api-overview) + dev architecture + core interfaces.
+- M (medium): S + docs/index + scenario index + troubleshooting + modules + contracts + ops runbook + changelog/devlog.
+- L (large): M + design docs + interface index + reference docs + ops troubleshooting + ops handoff.
+
+Heuristic only (not strict): use counts to support judgment.
+- S: most dimensions Low (e.g., entrypoints <= 3, modules <= 3, simple mechanisms).
+- M: several Medium (e.g., entrypoints 4-8, modules 4-8, some complex mechanisms).
+- L: multiple High (e.g., entrypoints >= 9, modules >= 9, multiple complex mechanisms).
 
 ### 2) Plan doc boundaries and migration (if needed)
 - Choose the target doc partition: user/dev/ops/reference/archive.
+- Enforce single-responsibility pages: each page answers one core question.
+- Keep user docs minimal: index, quickstart, scenario index, API overview, troubleshooting.
 - Map existing docs to the new structure before moving anything.
 - Use references/migration-checklist.md to execute moves and link rewrites.
 
@@ -51,6 +60,7 @@ Pick scope:
 - Prefer minimal runnable examples and explicit constraints.
 - Put strict interface IO contracts in dev/contracts.
 - Keep user-facing API pages as a short "API overview" only.
+- Keep parameters and IO specs only in dev/interfaces; user docs link instead of repeating.
 - Add adapter delta docs for instance-specific deviations when needed.
 
 ### 7) Align with code
@@ -65,20 +75,38 @@ Pick scope:
 - Users: quick usage, clear overview, and readable API/config queries.
 - Developers: precise definitions, decision points, and boundaries.
 - Docs are organized, searchable, and mapped to code entrypoints.
+- User-facing docs avoid repeated IO details and link to dev sources.
+
+## Output modes
+- Recommendations: provide structure and advice without editing files.
+- Templates: update skill templates in `references/` and `SKILL.md`.
+- Delivery: apply changes directly to project docs.
+- If the user specifies a mode, follow it.
 
 ## Reference files
 - references/doc-system-outline.md
 - references/doc-index-template.md
 - references/architecture-template.md
 - references/module-template.md
+- references/design-template.md
 - references/api-config-template.md
 - references/interface-contract-template.md
+- references/contracts-template.md
 - references/adapters-delta-template.md
 - references/overview-table-template.md
 - references/scenario-path-index.md
+- references/user-doc-template.md
 - references/migration-checklist.md
 - references/consistency-checklist.md
 - references/change-sync-rules.md
 - references/writing-style.md
 - references/examples-catalog.md
 - references/rewrite-checklist.md
+- references/ops-runbook-template.md
+- references/ops-troubleshooting-template.md
+- references/dev-index-template.md
+- references/interface-index-template.md
+- references/ops-handoff-template.md
+- references/reference-glossary-template.md
+- references/reference-conventions-template.md
+- references/reference-structure-template.md
