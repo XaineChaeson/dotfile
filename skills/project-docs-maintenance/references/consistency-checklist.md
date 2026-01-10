@@ -6,7 +6,7 @@
 - Errors and edge cases reflect current code paths.
 - Examples are runnable or explicitly marked as pseudocode.
 - Lifecycle examples (when required) cover all public entrypoints in order.
-- If lifecycle is split, the index includes a coverage matrix and runnable happy path.
+- If lifecycle is split, the index includes a full coverage matrix and a runnable happy-path subset.
 - Phase pages link back to the lifecycle index and avoid repeating full IO details.
 - Architecture diagrams align with current modules.
 - Module docs reflect actual boundaries and responsibilities.

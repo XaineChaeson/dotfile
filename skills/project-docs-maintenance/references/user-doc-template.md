@@ -18,9 +18,10 @@ Use this for `docs/user/` pages to keep structure and tone consistent.
 
 ## Full lifecycle example
 - Required when the module has multiple public entrypoints or a multi-step lifecycle.
-- Use annotated steps and link to interface docs for IO details.
+- Use annotated steps and explain each API's role in the lifecycle.
+- Coverage must include all public entrypoints in `docs/dev/interfaces/*`.
 - Keep a single-page walkthrough when possible.
-- If split, link to a lifecycle index that includes a runnable happy path.
+- If split, link to a lifecycle index that includes a full coverage matrix and a runnable happy-path subset.
 
 ## Common pitfalls
 - <what breaks, why, and how to avoid it>

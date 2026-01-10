@@ -11,9 +11,11 @@ description: Build, update, or rewrite project documentation to reflect current 
 - Keep docs aligned to code; do not run automation.
 - Minimize duplication: a single source of truth with links elsewhere.
 - Default to recommendations unless the user explicitly requests template edits or doc changes.
-- Lifecycle examples default to a single page with a runnable happy path.
+- Lifecycle examples default to a single page with full public entrypoint coverage plus a runnable happy-path subset.
+- Full coverage means every public entrypoint listed in `docs/dev/interfaces/*` appears in the coverage matrix and the walkthrough.
+- Steps that are not directly runnable must be labeled as conditional/pseudo and include preconditions.
 - Split lifecycle examples only by module/product/phase when there are distinct lifecycles or many entrypoints with branching phases.
-- If split, use an index + phase pages (max depth 2); the index must include coverage matrix, sequence summary, and a minimal runnable example.
+- If split, use an index + phase pages (max depth 2); the index must include full coverage matrix, sequence summary, and a runnable happy-path subset.
 - Never split based on line count alone.
 
 ## Workflow
@@ -61,8 +63,9 @@ Heuristic only (not strict): use counts to support judgment.
 
 ### 6) Fill core documents
 - Follow templates from references/.
-- Prefer minimal runnable examples and explicit constraints.
-- For modules with multi-step lifecycles or multiple public entrypoints, add one full lifecycle walkthrough in user docs (use references/lifecycle-example-template.md).
+- Prefer annotated examples with explicit constraints and preconditions.
+- For modules with multi-step lifecycles or multiple public entrypoints, add one full coverage lifecycle walkthrough in user docs (use references/lifecycle-example-template.md).
+- The walkthrough must cover all public entrypoints in `docs/dev/interfaces/*` and include a runnable happy-path subset.
 - Keep lifecycle walkthroughs on a single page by default; split only when the lifecycle becomes distinct by module/product/phase.
 - If split, create a lifecycle index and phase pages (use references/lifecycle-index-template.md and references/lifecycle-phase-template.md).
 - Put strict interface IO contracts in dev/contracts.
@@ -85,8 +88,8 @@ Heuristic only (not strict): use counts to support judgment.
 - Apply references/change-sync-rules.md if present.
 
 ## Output expectations
-- Users: quick usage, clear overview, and readable API/config queries, plus a full lifecycle example when required.
-- Lifecycle examples keep a runnable happy path on the main lifecycle page (index when split).
+- Users: quick usage, clear overview, and readable API/config queries, plus a full coverage lifecycle example with annotated roles.
+- Lifecycle examples include a complete coverage matrix, a full annotated walkthrough, and a runnable happy-path subset (main page or index when split).
 - Developers: precise definitions, decision points, and boundaries.
 - Docs are organized, searchable, and mapped to code entrypoints.
 - User-facing docs avoid repeated IO details and link to dev sources.

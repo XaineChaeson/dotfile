@@ -1,7 +1,8 @@
 # Lifecycle Example Template
 
 Use this to show a full module lifecycle: all public entrypoints, call order,
-and each interface's role in the lifecycle.
+and each interface's role in the lifecycle. Provide full coverage plus a runnable
+happy-path subset.
 
 ## Goal
 - <User goal in one sentence>
@@ -10,62 +11,87 @@ and each interface's role in the lifecycle.
 - Scope: <what this walkthrough covers>
 - Non-goals: <what it does not cover>
 
+## Coverage rules
+- Include every public entrypoint from `docs/dev/interfaces/*`.
+- If a step is conditional or not directly runnable, label it and explain preconditions.
+
 ## Preconditions
 - Auth/config required.
 - Required environment state.
 - Required setup steps.
 
 ## Interface coverage (must be complete)
-| Interface | Phase | Role in lifecycle | Side effects | Link |
-|----------|-------|-------------------|--------------|------|
-| <module.Class.method> | <init/setup/run/teardown> | <why it exists> | <state/external changes> | <doc link> |
+| Interface | Phase | Role in lifecycle | Runnable? | Preconditions / Notes | Link |
+|----------|-------|-------------------|-----------|-----------------------|------|
+| <module.Class.method> | <init/setup/run/teardown> | <why it exists> | <yes/no/conditional> | <constraints> | <doc link> |
 
-## Lifecycle sequence (annotated)
-> Each step must explain the interface role and the output or state change.
+## Lifecycle flow (diagram)
+> Use a flowchart to show the overall lifecycle. Include every public entrypoint
+> at least once; use dashed edges for conditional or error flows.
 
-1) **[Phase: Init]**
-   **Call**: `<module.init(config)>`
-   **Inputs**: <key params>
-   **Output**: <return shape>
-   **State change**: <state transition or side effects>
-   **Why this interface**: <role in lifecycle>
+```mermaid
+flowchart TD
+  A[Init: <module.init>] --> B[Setup: <module.prepare>]
+  B --> C[Run: <module.execute>]
+  C --> D[Teardown: <module.close>]
+  B -. conditional .-> E[Optional: <module.warmup>]
+  C -. error .-> F[Recovery: <module.rollback>]
+```
 
-2) **[Phase: Setup]**
-   **Call**: `<module.prepare(handle, options)>`
-   **Inputs**: <key params>
-   **Output**: <return shape>
-   **State change**: <state transition or side effects>
-   **Why this interface**: <role in lifecycle>
+## Lifecycle steps (index list)
+> Short, ordered list that mirrors the diagram and covers all public entrypoints.
 
-3) **[Phase: Run]**
-   **Call**: `<module.execute(handle, payload)>`
-   **Inputs**: <key params>
-   **Output**: <result>
-   **State change**: <state transition or side effects>
-   **Why this interface**: <role in lifecycle>
+1) **[Phase: Init]** `<module.init(config)>` - Role: <why it exists>; Output: <return shape>; Runnable: <yes/no/conditional>; Preconditions: <assumptions/limits>; Link: <doc link>
+2) **[Phase: Setup]** `<module.prepare(handle, options)>` - Role: <why it exists>; Output: <return shape>; Runnable: <yes/no/conditional>; Preconditions: <assumptions/limits>; Link: <doc link>
+3) **[Phase: Run]** `<module.execute(handle, payload)>` - Role: <why it exists>; Output: <result>; Runnable: <yes/no/conditional>; Preconditions: <assumptions/limits>; Link: <doc link>
+4) **[Phase: Teardown]** `<module.close(handle)>` - Role: <why it exists>; Output: <result>; Runnable: <yes/no/conditional>; Preconditions: <assumptions/limits>; Link: <doc link>
 
-4) **[Phase: Teardown]**
-   **Call**: `<module.close(handle)>`
-   **Inputs**: <key params>
-   **Output**: <result>
-   **State change**: <resources released>
-   **Why this interface**: <role in lifecycle>
-
-## End-to-end runnable example (annotated)
-> Mark as pseudo if not runnable.
+## Runnable happy-path subset (minimal)
+> Keep this strictly runnable and minimal; no conditional branches.
 
 ```pseudo
-# 1) init: create module context and validate config
+# Happy-path (minimal, runnable)
+ctx = Module.init(config)
+Module.prepare(ctx, options)
+result = Module.execute(ctx, payload)
+Module.close(ctx)
+```
+
+## Lifecycle example (code, full coverage)
+> Use runnable-first code to cover as many entrypoints as possible. Every public
+> entrypoint must appear at least once (happy path or conditional). Mark any
+> non-runnable lines as conditional or pseudo.
+
+```pseudo
+# Full lifecycle example (runnable-first, full coverage)
+config = load_config()
 ctx = Module.init(config)
 
-# 2) setup: prepare resources
+# optional preflight (conditional)
+if config.preflight_enabled:
+    Module.preflight(ctx)
+
 Module.prepare(ctx, options)
 
-# 3) run: core execution
-result = Module.execute(ctx, payload)
+# optional warmup (conditional)
+if options.warmup:
+    Module.warmup(ctx)
 
-# 4) teardown: release resources
-Module.close(ctx)
+try:
+    result = Module.execute(ctx, payload)
+
+    # optional follow-up (conditional)
+    if result.needs_sync:
+        Module.sync(ctx, result)
+except ModuleError as err:
+    # recovery paths (conditional)
+    if err.is_retriable:
+        Module.retry(ctx, err)
+    else:
+        Module.rollback(ctx)
+    raise
+finally:
+    Module.close(ctx)
 ```
 
 ## Error + recovery path

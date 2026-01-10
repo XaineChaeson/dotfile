@@ -1,7 +1,7 @@
 # Lifecycle Index Template
 
 Use this when a lifecycle example is too large for a single page. The index must
-still let users complete the happy path without deep navigation.
+still expose full coverage and a runnable happy-path subset without deep navigation.
 
 ## Goal
 - <User goal in one sentence>
@@ -11,6 +11,7 @@ still let users complete the happy path without deep navigation.
 - Non-goals: <what it does not cover>
 
 ## Coverage matrix
+> Must cover all public entrypoints from `docs/dev/interfaces/*`.
 | Area | Lifecycle page | Entrypoints | Notes |
 |------|----------------|------------|-------|
 | <module/product> | <link> | <list> | <notes> |
@@ -22,8 +23,8 @@ still let users complete the happy path without deep navigation.
 4) <recovery>
 5) <teardown>
 
-## Minimal runnable example
-> Must be runnable or explicitly labeled as pseudo. This is the happy path.
+## Runnable happy-path subset
+> Must be runnable or explicitly labeled as pseudo. This is the happy-path subset.
 
 ```pseudo
 <short end-to-end example>

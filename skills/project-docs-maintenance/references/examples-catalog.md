@@ -35,14 +35,14 @@ Required fields:
 - Scope and non-goals
 - Preconditions (auth/config/state)
 - Interface coverage table (all public entrypoints)
-- Lifecycle sequence with role and output/state change per step
-- End-to-end runnable example (annotated) or labeled pseudocode
+- Full lifecycle sequence with role and output/state change per step
+- Runnable happy-path subset (annotated) or labeled pseudocode
 - Error + recovery path
 - Cleanup/idempotency
 - Related docs
 Notes:
 - Keep a single-page walkthrough when possible.
-- If split, use an index + phase pages; the index must include a runnable happy path.
+- If split, use an index + phase pages; the index must include a full coverage matrix and a runnable happy-path subset.
 
 ## Example pattern: module boundary
 Required fields:

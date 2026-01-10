@@ -11,9 +11,11 @@ Do not repeat the full lifecycle; keep this page focused.
 - Required environment state.
 
 ## Interfaces in this phase
-| Interface | Role | Side effects | Link |
-|----------|------|--------------|------|
-| <module.Class.method> | <role> | <state/external changes> | <doc link> |
+> Must include every interface used in this phase and mark runnable status.
+
+| Interface | Role | Runnable? | Preconditions / Notes | Link |
+|----------|------|-----------|-----------------------|------|
+| <module.Class.method> | <role> | <yes/no/conditional> | <constraints> | <doc link> |
 
 ## Steps (annotated)
 1) **<step name>**
@@ -22,9 +24,11 @@ Do not repeat the full lifecycle; keep this page focused.
    **Output**: <return shape>
    **State change**: <state transition or side effects>
    **Why this interface**: <role in lifecycle>
+   **Runnable**: <yes/no/conditional>
+   **Preconditions**: <assumptions/limits>
 
 ## Example (annotated)
-> Mark as pseudo if not runnable.
+> Must be runnable or explicitly labeled as pseudo.
 
 ```pseudo
 <phase example>
