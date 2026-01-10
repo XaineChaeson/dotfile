@@ -11,3 +11,4 @@
 - Use user voice in `docs/user/` and developer voice in `docs/dev/`.
 - Standardize units and time formats (e.g., ms, UTC, ISO-8601).
 - Link any stability/version mentions to the interface index or changelog.
+- Prefer single-page lifecycle walkthroughs; use tables and anchors before splitting.

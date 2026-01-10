@@ -50,6 +50,8 @@
 - api-overview.md: entrypoint overview + API scan table.
 - troubleshooting.md: common issues and self-checks.
 - Optional: feature guides for high-frequency tasks only.
+- Optional: lifecycle examples for complex modules (full interface walkthroughs).
+- Optional: docs/user/lifecycle/index.md + docs/user/lifecycle/<phase>.md when split is required.
 
 ## Reference docs (shared definitions)
 - glossary.md: canonical term definitions.

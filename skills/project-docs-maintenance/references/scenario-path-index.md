@@ -17,6 +17,7 @@ Map a task to the exact entrypoint, required config, and example. Use the table 
 ```bash
 <short runnable example>
 ```
+**Lifecycle example**: <link to full walkthrough or lifecycle index when required>
 **Common pitfalls**: <constraints, edge cases, or error triggers>
 **Related docs**: <api overview or interface reference links>
 
@@ -28,5 +29,6 @@ Map a task to the exact entrypoint, required config, and example. Use the table 
 ```bash
 <short runnable example>
 ```
+**Lifecycle example**: <link to full walkthrough or lifecycle index when required>
 **Common pitfalls**: <constraints, edge cases, or error triggers>
 **Related docs**: <api overview or interface reference links>

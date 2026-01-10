@@ -35,6 +35,11 @@
 
 ## Examples
 - Minimal and typical usage (2-3 examples max, not full API coverage).
+- Link to a full lifecycle example when the module has a multi-step lifecycle.
+
+## Full lifecycle example (link)
+- Required when the module exposes multiple public entrypoints or recovery flows.
+- Link to the user-facing lifecycle example (single page or lifecycle index); do not duplicate full IO details.
 
 ## Related docs
 - Links to PRD, design, interface contracts, or other modules.

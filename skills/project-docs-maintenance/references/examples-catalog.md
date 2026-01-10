@@ -29,6 +29,21 @@ Required fields:
 - Returns (shape only)
 - Errors (2-3 common)
 
+## Example pattern: lifecycle walkthrough
+Required fields:
+- Goal (1 sentence)
+- Scope and non-goals
+- Preconditions (auth/config/state)
+- Interface coverage table (all public entrypoints)
+- Lifecycle sequence with role and output/state change per step
+- End-to-end runnable example (annotated) or labeled pseudocode
+- Error + recovery path
+- Cleanup/idempotency
+- Related docs
+Notes:
+- Keep a single-page walkthrough when possible.
+- If split, use an index + phase pages; the index must include a runnable happy path.
+
 ## Example pattern: module boundary
 Required fields:
 - Responsibility

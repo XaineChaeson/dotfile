@@ -22,6 +22,8 @@ Use when doing a full documentation rewrite.
 ## 4) Re-derive examples
 - Regenerate examples from code entrypoints.
 - Mark pseudocode explicitly if not runnable.
+- Add a full lifecycle walkthrough when modules have multi-step lifecycles.
+- If the lifecycle is split, ensure the index page includes a runnable happy path.
 
 ## 5) Contract verification
 - Ensure strict IO specs match implementation.

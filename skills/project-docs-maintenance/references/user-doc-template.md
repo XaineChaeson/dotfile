@@ -16,6 +16,12 @@ Use this for `docs/user/` pages to keep structure and tone consistent.
 - <primary steps or explanation>
 - <key options or constraints>
 
+## Full lifecycle example
+- Required when the module has multiple public entrypoints or a multi-step lifecycle.
+- Use annotated steps and link to interface docs for IO details.
+- Keep a single-page walkthrough when possible.
+- If split, link to a lifecycle index that includes a runnable happy path.
+
 ## Common pitfalls
 - <what breaks, why, and how to avoid it>
 
