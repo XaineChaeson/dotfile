@@ -27,24 +27,27 @@ happy-path subset.
 
 ## Lifecycle flow (diagram)
 > Use a flowchart to show the overall lifecycle. Include every public entrypoint
-> at least once; use dashed edges for conditional or error flows.
+> at least once; use dashed edges for conditional or error flows. Quote node
+> labels to avoid Mermaid parse errors with parentheses or symbols.
 
 ```mermaid
 flowchart TD
-  A[Init: <module.init>] --> B[Setup: <module.prepare>]
-  B --> C[Run: <module.execute>]
-  C --> D[Teardown: <module.close>]
-  B -. conditional .-> E[Optional: <module.warmup>]
-  C -. error .-> F[Recovery: <module.rollback>]
+  A["Init: <module.init>"] --> B["Setup: <module.prepare>"]
+  B --> C["Run: <module.execute>"]
+  C --> D["Teardown: <module.close>"]
+  B -. conditional .-> E["Optional: <module.warmup>"]
+  C -. error .-> F["Recovery: <module.rollback>"]
 ```
 
 ## Lifecycle steps (index list)
 > Short, ordered list that mirrors the diagram and covers all public entrypoints.
 
-1) **[Phase: Init]** `<module.init(config)>` - Role: <why it exists>; Output: <return shape>; Runnable: <yes/no/conditional>; Preconditions: <assumptions/limits>; Link: <doc link>
-2) **[Phase: Setup]** `<module.prepare(handle, options)>` - Role: <why it exists>; Output: <return shape>; Runnable: <yes/no/conditional>; Preconditions: <assumptions/limits>; Link: <doc link>
-3) **[Phase: Run]** `<module.execute(handle, payload)>` - Role: <why it exists>; Output: <result>; Runnable: <yes/no/conditional>; Preconditions: <assumptions/limits>; Link: <doc link>
-4) **[Phase: Teardown]** `<module.close(handle)>` - Role: <why it exists>; Output: <result>; Runnable: <yes/no/conditional>; Preconditions: <assumptions/limits>; Link: <doc link>
+| # | Phase | Interface | Role (short) | Output | Runnable | Preconditions | Link |
+|---|-------|-----------|--------------|--------|----------|---------------|------|
+| 1 | Init | `<module.init(config)>` | <why it exists> | <return shape> | <yes/no/conditional> | <assumptions/limits> | <doc link> |
+| 2 | Setup | `<module.prepare(handle, options)>` | <why it exists> | <return shape> | <yes/no/conditional> | <assumptions/limits> | <doc link> |
+| 3 | Run | `<module.execute(handle, payload)>` | <why it exists> | <result> | <yes/no/conditional> | <assumptions/limits> | <doc link> |
+| 4 | Teardown | `<module.close(handle)>` | <why it exists> | <result> | <yes/no/conditional> | <assumptions/limits> | <doc link> |
 
 ## Runnable happy-path subset (minimal)
 > Keep this strictly runnable and minimal; no conditional branches.
