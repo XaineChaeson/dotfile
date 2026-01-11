@@ -57,3 +57,6 @@
 - glossary.md: canonical term definitions.
 - conventions.md: naming, formats, and placeholder rules.
 - structure.md: doc layout and ownership.
+
+## Ops structure guidance
+- Use references/ops-doc-structure.md to choose the ops layout and split rules.

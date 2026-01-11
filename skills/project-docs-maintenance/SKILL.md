@@ -124,6 +124,7 @@ Heuristic only (not strict): use counts to support judgment.
 - references/dev-index-template.md
 - references/interface-index-template.md
 - references/ops-handoff-template.md
+- references/ops-doc-structure.md
 - references/config-reference-template.md
 - references/lifecycle-example-template.md
 - references/lifecycle-index-template.md
