@@ -10,8 +10,14 @@ Use this for mechanism-level design notes and decision records.
 - Goals:
 - Non-goals:
 
-## Design overview
-- High-level approach and components.
+## Design overview (narrative)
+- Write 1-3 short paragraphs.
+- Explain why this design exists and how it works at a high level.
+- Keep it readable without implementation details.
+
+## Mechanism spec (link)
+- Required when decision logic is non-trivial or stateful.
+- Link to the mechanism spec; do not duplicate rule details.
 
 ## Data model (if applicable)
 | Entity | Description | Key fields |
@@ -25,9 +31,10 @@ stateDiagram-v2
   Pending --> Done
 ```
 
-## Algorithm or mechanism
-- Step-by-step flow.
+## Algorithm or mechanism (summary)
+- Step-by-step summary only.
 - Key invariants.
+- Link to the mechanism spec for full decision rules.
 
 ## Trade-offs
 - Alternatives considered and why rejected.

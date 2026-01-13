@@ -10,8 +10,13 @@
 - Phase pages link back to the lifecycle index and avoid repeating full IO details.
 - Architecture diagrams align with current modules.
 - Module docs reflect actual boundaries and responsibilities.
+- Mechanism specs exist for non-trivial decision logic and are linked from design, module, and architecture docs.
+- Mechanism specs include narrative overview and decision rules with purpose, inputs, steps, state updates, outputs, and edge cases.
+- Input/config parameters map to decision rules (input coverage matrix).
 - User docs link to dev interfaces instead of repeating IO details.
 - Scenario index aligns with API overview table.
 - Change log or devlog updated when public behavior changes.
 - Glossary/term usage is consistent across user and dev docs.
+- Terms used in mechanism specs appear in the glossary.
+- Mechanism specs include math-level and real-world examples.
 - Versioning and stability labels are present where required.

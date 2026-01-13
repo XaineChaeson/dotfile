@@ -19,6 +19,13 @@ flowchart LR
 ## Components
 - List core modules and their responsibilities.
 
+## Mechanism map
+> Keep this high-level and link to design and mechanism specs.
+
+| Mechanism | Purpose | Owning module | Design doc | Mechanism spec |
+|-----------|---------|---------------|------------|----------------|
+|           |         |               |            |                |
+
 ## Repo layout (overview)
 ```text
 <repo>/
@@ -57,6 +64,7 @@ flowchart LR
 
 ## Key mechanisms
 - State management, retries, reconciliation, caching, scheduling.
+- Link to mechanism specs instead of repeating decision rules.
 
 ## State model (if applicable)
 - Key states and transitions.

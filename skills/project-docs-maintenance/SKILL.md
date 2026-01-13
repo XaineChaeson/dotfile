@@ -10,6 +10,8 @@ description: Build, update, or rewrite project documentation to reflect current 
 - Prioritize developer precision: define boundaries, decisions, and contracts.
 - Keep docs aligned to code; do not run automation.
 - Minimize duplication: a single source of truth with links elsewhere.
+- Mechanism docs prioritize decision logic and narrative overview, not code-level detail.
+- Define terminology once in the glossary when used in mechanism specs.
 - Default to recommendations unless the user explicitly requests template edits or doc changes.
 - Lifecycle examples default to a single page with full public entrypoint coverage plus a runnable happy-path subset.
 - Full coverage means every public entrypoint listed in `docs/dev/interfaces/*` appears in the coverage matrix and the walkthrough.
@@ -24,7 +26,7 @@ description: Build, update, or rewrite project documentation to reflect current 
 Score each dimension as Low/Med/High based on current repo state:
 - Entrypoints: number of APIs/CLIs/config entrypoints.
 - Modules: number of core modules and adapters.
-- Mechanisms: state machines, async flows, reconciliation, retries.
+- Mechanisms: decision logic complexity, state machines, async flows, reconciliation, retries.
 - External deps: exchanges, platforms, third-party services.
 - Roles: user types (user/dev/ops) and their needs.
 
@@ -68,6 +70,11 @@ Heuristic only (not strict): use counts to support judgment.
 - The walkthrough must cover all public entrypoints in `docs/dev/interfaces/*` and include a runnable happy-path subset.
 - Keep lifecycle walkthroughs on a single page by default; split only when the lifecycle becomes distinct by module/product/phase.
 - If split, create a lifecycle index and phase pages (use references/lifecycle-index-template.md and references/lifecycle-phase-template.md).
+- When non-trivial decision logic exists, create a mechanism spec (use references/mechanism-spec-template.md).
+  - Trigger when any two apply: multi-path decisions; state/time dependence; guardrails/thresholds; config interactions; irreversible side effects.
+  - Mechanism specs must include narrative overview, terminology, detailed decision rules (purpose/inputs/steps/state/outputs/edge cases), mode matrix (if applicable), input coverage matrix, math-level example, real-world example, and observability semantics.
+  - Link mechanism specs from design, module, and architecture docs; avoid duplicating rule details.
+  - Ensure terms used in mechanism specs appear in the glossary.
 - Put strict interface IO contracts in dev/contracts.
 - Keep user-facing API pages as a short "API overview" only.
 - Keep parameters and IO specs only in dev/interfaces; user docs link instead of repeating.
@@ -91,6 +98,7 @@ Heuristic only (not strict): use counts to support judgment.
 - Users: quick usage, clear overview, and readable API/config queries, plus a full coverage lifecycle example with annotated roles.
 - Lifecycle examples include a complete coverage matrix, a full annotated walkthrough, and a runnable happy-path subset (main page or index when split).
 - Developers: precise definitions, decision points, and boundaries.
+- Mechanism specs include narrative overview, detailed decision rules, and reproducible examples; terms are defined in the glossary.
 - Docs are organized, searchable, and mapped to code entrypoints.
 - User-facing docs avoid repeated IO details and link to dev sources.
 
@@ -106,6 +114,7 @@ Heuristic only (not strict): use counts to support judgment.
 - references/architecture-template.md
 - references/module-template.md
 - references/design-template.md
+- references/mechanism-spec-template.md
 - references/api-config-template.md
 - references/interface-contract-template.md
 - references/contracts-template.md

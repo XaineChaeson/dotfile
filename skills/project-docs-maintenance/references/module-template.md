@@ -26,6 +26,14 @@
 ## State and lifecycle
 - Key states and transitions.
 
+## Mechanism summary
+- 3-5 sentences describing the decisions this module makes and why.
+- Keep this at behavior level; avoid implementation details.
+
+## Mechanism spec (link)
+- Required when decision logic is non-trivial or stateful.
+- Link to the mechanism spec; do not duplicate rule details.
+
 ## Error handling
 - Common failures and recovery paths.
 
