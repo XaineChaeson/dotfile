@@ -84,5 +84,6 @@ single source of truth for mechanism rules. Do not copy implementation details.
 ## Related docs
 - Architecture
 - Module overview
+- Module flow diagrams (runtime/data) when applicable
 - Interfaces / contracts
 - Glossary

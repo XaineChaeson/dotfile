@@ -45,6 +45,8 @@ flowchart LR
   D --> F["State Store"]
 ```
 
+> For complex modules, link to module-level flow diagrams for runtime and data dependencies.
+
 ## Module I/O matrix (clarity)
 | Module | Inputs | Outputs | Transport/Store |
 |--------|--------|---------|-----------------|

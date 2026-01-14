@@ -9,6 +9,9 @@
 - If lifecycle is split, the index includes a full coverage matrix and a runnable happy-path subset.
 - Phase pages link back to the lifecycle index and avoid repeating full IO details.
 - Architecture diagrams align with current modules.
+- Module runtime diagrams align with entrypoints and flags.
+- Data dependency diagrams match state lists and store conventions.
+- Module diagrams align with architecture data flow and mechanism specs.
 - Module docs reflect actual boundaries and responsibilities.
 - Mechanism specs exist for non-trivial decision logic and are linked from design, module, and architecture docs.
 - Mechanism specs include narrative overview and decision rules with purpose, inputs, steps, state updates, outputs, and edge cases.

@@ -75,6 +75,11 @@ Heuristic only (not strict): use counts to support judgment.
   - Mechanism specs must include narrative overview, terminology, detailed decision rules (purpose/inputs/steps/state/outputs/edge cases), mode matrix (if applicable), input coverage matrix, math-level example, real-world example, and observability semantics.
   - Link mechanism specs from design, module, and architecture docs; avoid duplicating rule details.
   - Ensure terms used in mechanism specs appear in the glossary.
+- For modules with any of: background threads/processes, state store reads/writes, multiple entrypoints, or a mechanism spec, add Module Flow Diagrams to the module doc (use references/module-template.md).
+  - Provide two diagrams: Runtime/Startup Dependencies and Data Dependencies (Read/Write).
+  - Split data dependencies into 2–3 lanes; label store edges with `read`/`write`.
+  - Avoid cross-lane edges by using node annotations; keep 6–10 nodes per diagram.
+  - List full state keys below the diagram (do not cram into nodes).
 - Put strict interface IO contracts in dev/contracts.
 - Keep user-facing API pages as a short "API overview" only.
 - Keep parameters and IO specs only in dev/interfaces; user docs link instead of repeating.
@@ -98,6 +103,7 @@ Heuristic only (not strict): use counts to support judgment.
 - Users: quick usage, clear overview, and readable API/config queries, plus a full coverage lifecycle example with annotated roles.
 - Lifecycle examples include a complete coverage matrix, a full annotated walkthrough, and a runnable happy-path subset (main page or index when split).
 - Developers: precise definitions, decision points, and boundaries.
+- Module docs include flow diagrams when concurrency or stateful stores exist.
 - Mechanism specs include narrative overview, detailed decision rules, and reproducible examples; terms are defined in the glossary.
 - Docs are organized, searchable, and mapped to code entrypoints.
 - User-facing docs avoid repeated IO details and link to dev sources.

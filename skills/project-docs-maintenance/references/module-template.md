@@ -16,6 +16,38 @@
 - Upstream dependencies and required services.
 - Downstream consumers.
 
+## Module Flow Diagrams
+> Required when the module has any of: background threads/processes, stateful store reads/writes,
+> multiple entrypoints, or a non-trivial mechanism spec.
+
+### A. Runtime / Startup Dependencies
+- Show startup order and conditional branches.
+- Label nodes with [main]/[thread]/[process].
+- Optional branches use dashed edges and label conditions.
+
+```mermaid
+flowchart TB
+  START["entrypoint"] --> CORE["Core module [main]"]
+  CORE --> CHECK{"feature enabled?"}
+  CHECK -- yes --> BG["Worker [thread]"]
+```
+
+### B. Data Dependencies (Read/Write)
+- Split into 2–3 horizontal lanes by domain.
+- Use `read` / `write` labels for store edges.
+- Replace cross-lane edges with node annotations to avoid line crossings.
+- Keep 6–10 nodes per diagram; move full key list below.
+
+```mermaid
+flowchart TB
+  subgraph laneA["domain A"]
+    A1["Producer"] --> A2["Store key group"]
+  end
+```
+
+### State list (full)
+- List full keys/records below the diagram (do not cram into nodes).
+
 ## Directory layout
 ```text
 <module>/
