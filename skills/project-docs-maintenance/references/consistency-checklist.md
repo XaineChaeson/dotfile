@@ -12,6 +12,9 @@
 - Module runtime diagrams align with entrypoints and flags.
 - Data dependency diagrams match state lists and store conventions.
 - Module diagrams align with architecture data flow and mechanism specs.
+- Mermaid labels avoid parentheses and use `<br/>` instead of `\n`.
+- State semantics table exists for stateful stores and includes Producer/Consumers/Example.
+- Module state tables list full keys touched with access level and example values.
 - Module docs reflect actual boundaries and responsibilities.
 - Mechanism specs exist for non-trivial decision logic and are linked from design, module, and architecture docs.
 - Mechanism specs include narrative overview and decision rules with purpose, inputs, steps, state updates, outputs, and edge cases.

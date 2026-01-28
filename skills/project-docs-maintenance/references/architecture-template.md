@@ -7,7 +7,8 @@
 ## System context (external)
 - Upstream dependencies and downstream consumers.
 - External services, data stores, or platforms.
-- Quote node labels in Mermaid to avoid parse errors with parentheses or symbols.
+- Quote node labels in Mermaid to avoid parse errors with symbols.
+- Avoid parentheses in labels; use `<br/>` for line breaks; keep labels short.
 
 ```mermaid
 flowchart LR
@@ -70,6 +71,8 @@ flowchart LR
 
 ## State model (if applicable)
 - Key states and transitions.
+- Keep this high-level and link to the reference conventions state table.
+- Module diagrams can expand state groups with finer detail.
 
 ## Entrypoints
 - API, CLI, jobs, services, configs.

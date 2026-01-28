@@ -79,10 +79,23 @@ Heuristic only (not strict): use counts to support judgment.
   - Provide two diagrams: Runtime/Startup Dependencies and Data Dependencies (Read/Write).
   - Split data dependencies into 2–3 lanes; label store edges with `read`/`write`.
   - Avoid cross-lane edges by using node annotations; keep 6–10 nodes per diagram.
-  - List full state keys below the diagram (do not cram into nodes).
+  - Mermaid labels: wrap labels in quotes, avoid parentheses, use `<br/>` for line breaks, and keep labels short.
+    If parentheses are unavoidable, use HTML entities `&#40;` and `&#41;`.
+  - In module docs, split state stores into 2–4 semantic nodes (e.g., snapshot, schedule, locks, orders).
+  - List full state keys below the diagram (do not cram into nodes) using a table with Key/Access/Purpose/Example.
+- Maintain a reference conventions page with a full state semantics table (Key/Meaning/Producer/Consumers/Example)
+  and link to it from architecture and module docs.
 - Put strict interface IO contracts in dev/contracts.
 - Keep user-facing API pages as a short "API overview" only.
 - Keep parameters and IO specs only in dev/interfaces; user docs link instead of repeating.
+- When persistent storage exists (Postgres or equivalent), maintain two layers of storage docs:
+  - A storage overview that explains the data system as a whole (tables, roles, event-to-table mapping, relationships, record flow).
+  - Per-table docs that define columns, keys, and lifecycle details.
+- If storage spans multiple business domains, split storage docs by business object domain:
+  - Domains are defined by what the data represents (e.g., market data, decisions, orders), not by service ownership.
+  - Keep `events` as a separate "event ledger" domain when it stores the full event envelope for all event types.
+  - Merge tightly coupled decision artifacts (e.g., predictions + signals) into a single "decision" domain when they form one business flow.
+  - Always add a cross-domain relationships page when domains are split.
 - Maintain full config parameters in a dedicated dev config doc (`docs/dev/config.md` or `docs/dev/config/`) when any of the following apply:
   - Config parameters > 8–10.
   - Config is shared across multiple modules/services.
@@ -90,6 +103,15 @@ Heuristic only (not strict): use counts to support judgment.
   - Multiple environments or profiles require different defaults.
 - For small/simple configs, an interface doc may include config details, but still keep a single source of truth.
 - Add adapter delta docs for instance-specific deviations when needed.
+- Storage docs guidance:
+  - Use references/storage-overview-template.md for the system-level storage view.
+  - Use references/storage-schema-template.md for per-table docs.
+  - The overview must include a record-flow diagram that shows how events write into tables across the full business flow.
+  - Per-table docs must include nullability/defaults, keys/indexes, relationships, lifecycle, data quality rules, and an example row.
+  - If domains exist, add:
+    - references/storage-index-template.md for the storage landing page.
+    - references/storage-domain-overview-template.md for per-domain overviews.
+    - references/storage-relationships-template.md for cross-domain relationships.
 
 ### 7) Align with code
 - Verify entrypoints, configs, defaults, and error conditions.
@@ -104,6 +126,9 @@ Heuristic only (not strict): use counts to support judgment.
 - Lifecycle examples include a complete coverage matrix, a full annotated walkthrough, and a runnable happy-path subset (main page or index when split).
 - Developers: precise definitions, decision points, and boundaries.
 - Module docs include flow diagrams when concurrency or stateful stores exist.
+- Module docs list full state keys touched with access level and examples; conventions define canonical meaning.
+- Storage docs include a system overview (table roles, mappings, relationships, record-flow diagram) and per-table definitions (schema, keys, lifecycle).
+- For multi-domain storage, docs include a storage index, per-domain overviews, and a cross-domain relationships page.
 - Mechanism specs include narrative overview, detailed decision rules, and reproducible examples; terms are defined in the glossary.
 - Docs are organized, searchable, and mapped to code entrypoints.
 - User-facing docs avoid repeated IO details and link to dev sources.
@@ -141,6 +166,11 @@ Heuristic only (not strict): use counts to support judgment.
 - references/ops-handoff-template.md
 - references/ops-doc-structure.md
 - references/config-reference-template.md
+- references/storage-overview-template.md
+- references/storage-schema-template.md
+- references/storage-index-template.md
+- references/storage-domain-overview-template.md
+- references/storage-relationships-template.md
 - references/lifecycle-example-template.md
 - references/lifecycle-index-template.md
 - references/lifecycle-phase-template.md

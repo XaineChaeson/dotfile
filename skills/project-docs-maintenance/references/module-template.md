@@ -24,6 +24,7 @@
 - Show startup order and conditional branches.
 - Label nodes with [main]/[thread]/[process].
 - Optional branches use dashed edges and label conditions.
+- Mermaid labels: always quote node labels, avoid parentheses, use `<br/>` for line breaks, keep labels short.
 
 ```mermaid
 flowchart TB
@@ -37,6 +38,9 @@ flowchart TB
 - Use `read` / `write` labels for store edges.
 - Replace cross-lane edges with node annotations to avoid line crossings.
 - Keep 6–10 nodes per diagram; move full key list below.
+- In module docs, split state store into 2–4 semantic nodes (e.g., snapshot, schedule, locks, orders)
+  instead of a single `store:*` node. Use a second diagram if needed.
+- Mermaid labels: always quote node labels, avoid parentheses, use `<br/>` for line breaks, keep labels short.
 
 ```mermaid
 flowchart TB
@@ -45,8 +49,14 @@ flowchart TB
   end
 ```
 
-### State list (full)
-- List full keys/records below the diagram (do not cram into nodes).
+### State semantics (full keys touched)
+- Provide a table with Key, Access (R/W/RW), Purpose, Example.
+- List all keys this module touches even if they are shared with other modules.
+- Keep descriptions short and link to the reference conventions page for canonical meaning.
+
+| Key | Access | Purpose | Example |
+|---|---|---|---|
+| `store:example` | RW | One-line semantic meaning. | `{"value":"..."}` |
 
 ## Directory layout
 ```text
