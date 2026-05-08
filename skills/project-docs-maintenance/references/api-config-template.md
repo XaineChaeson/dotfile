@@ -1,6 +1,6 @@
 # API / Config Overview (User)
 
-Use this page for a compact, user-facing scan of core entrypoints. Keep detailed IO specs in `docs/dev/interfaces/`.
+Use this page for a compact, user-facing scan of core entrypoints. Keep detailed IO specs in the repo's dev contract/interface docs.
 
 ## Purpose
 - Primary goals:
@@ -46,4 +46,4 @@ Use this as a quick scan of available entrypoints. Keep it brief and link to the
 |            |            |             |            |         |       |
 
 ## Related Docs
-- `docs/dev/interfaces/`: full interface references
+- `<dev contract/interface docs>`: full interface references

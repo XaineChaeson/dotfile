@@ -1,30 +1,38 @@
-# User Doc Template
+# Manual Page Template
 
-Use this for `docs/user/` pages to keep structure and tone consistent.
+Use this for manual/user pages. Keep the page action-oriented and link to fact owners for design or contract details.
 
-## Purpose
-- What this page helps the user do.
-- Who this page is for.
- - Core question this page answers (single responsibility).
+## Goal
 
-## Minimal example
+<What the user can accomplish after reading this page.>
+
+## Preconditions
+
+- Required environment, auth, config, services, data, or role.
+- Explicitly state when a step is conditional or pseudo.
+
+## Quick Path
+
 ```bash
-<short runnable example>
+<shortest safe command path or minimal workflow>
 ```
 
-## Main content
-- <primary steps or explanation>
-- <key options or constraints>
+## Full Steps
 
-## Full lifecycle example
-- Required when the module has multiple public entrypoints or a multi-step lifecycle.
-- Use annotated steps and explain each API's role in the lifecycle.
-- Coverage must include all public entrypoints in `docs/dev/interfaces/*`.
-- Keep a single-page walkthrough when possible.
-- If split, link to a lifecycle index that includes a full coverage matrix and a runnable happy-path subset.
+| Step | Action | Expected Result | If It Fails |
+| --- | --- | --- | --- |
+| 1 | `<action>` | `<observable result>` | `<troubleshooting link>` |
 
-## Common pitfalls
-- <what breaks, why, and how to avoid it>
+## Entrypoint Coverage
 
-## Related docs
-- <links to deeper docs>
+When this page covers a lifecycle or large surface, include:
+
+| Entrypoint | Role | Runnable? | Preconditions | Design / Contract Source |
+| --- | --- | --- | --- | --- |
+
+## Related Docs
+
+- Design source: `<architecture or PRD link>`
+- Contract source: `<dev contract link>`
+- Scenario/example: `<scenario link>`
+- Troubleshooting: `<troubleshooting link>`

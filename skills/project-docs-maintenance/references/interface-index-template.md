@@ -7,4 +7,5 @@ Use this to list all interface docs and their stability.
 |           |            |           |       |       |
 
 ## Related docs
-- `docs/user/api-overview.md`
+- `<manual/API or entrypoint overview>`
+- `<lifecycle coverage matrix>`

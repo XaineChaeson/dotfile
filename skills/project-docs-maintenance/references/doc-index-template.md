@@ -1,26 +1,33 @@
-# Docs Index
+# Docs Index Template
 
-One-paragraph summary of the system and where to start. Keep user docs minimal and link to the single source of truth.
+One-paragraph summary of the system and where to start. Keep this page navigational; link to fact owners instead of repeating content.
 
-## User docs (start here)
-- Index: `docs/user/index.md`
-- Quickstart: `docs/user/quickstart.md`
-- Scenario index: `docs/user/scenario-index.md`
-- API overview: `docs/user/api-overview.md`
-- Troubleshooting: `docs/user/troubleshooting.md`
+## Start Here
 
-## Ops and runtime
-- Runbook: `docs/ops/RUNBOOK.md`
-- Logging and monitoring: `docs/ops/LOGGING.md`
+| Need | Document |
+| --- | --- |
+| Current status and fact sources | `<project-status path>` |
+| Architecture | `<architecture index>` |
+| User manual / quickstart | `<manual index>` |
+| Developer contracts and implementation | `<dev index>` |
+| Concrete scenarios / examples | `<scenarios index>` |
+| Operations | `<ops index>` |
 
-## Design and mechanisms
-- Architecture: `docs/dev/architecture.md`
-- Module boundaries: `docs/dev/modules/`
-- Mechanisms and state: `docs/dev/design/`
+## Documentation Layers
 
-## PRD and contracts
-- PRD index: `docs/prd/PRD_INDEX.md`
-- Interface contracts: `docs/dev/interfaces/`
+| Layer | Path | Owns |
+| --- | --- | --- |
+| PRD | `<prd path>` | product goals and acceptance criteria |
+| Architecture | `<architecture path>` | boundaries, components, data flow, tradeoffs |
+| Manual | `<manual path>` | setup, lifecycle, operations, troubleshooting |
+| Dev | `<dev path>` | contracts, implementation design, config governance |
+| Scenarios | `<scenarios path>` | concrete instances and acceptance evidence |
+| Reference | `<reference path>` | glossary, conventions, shared schemas |
 
-## Change records
-- `CHANGELOG.md` or `docs/devlog.md`
+## Common Paths
+
+- First successful run: `<quickstart>`
+- Full lifecycle coverage: `<lifecycle>`
+- Configuration: `<config manual>`
+- Troubleshooting: `<troubleshooting>`
+- Change rules: `<agent rules or change-sync page>`

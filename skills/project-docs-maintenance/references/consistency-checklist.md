@@ -1,28 +1,38 @@
 # Consistency Checklist
 
-- Entrypoints in docs exist in code and names match.
-- Defaults and required fields match code behavior.
-- Config keys and schema match current implementation.
-- Errors and edge cases reflect current code paths.
-- Examples are runnable or explicitly marked as pseudocode.
-- Lifecycle examples (when required) cover all public entrypoints in order.
-- If lifecycle is split, the index includes a full coverage matrix and a runnable happy-path subset.
-- Phase pages link back to the lifecycle index and avoid repeating full IO details.
-- Architecture diagrams align with current modules.
-- Module runtime diagrams align with entrypoints and flags.
-- Data dependency diagrams match state lists and store conventions.
-- Module diagrams align with architecture data flow and mechanism specs.
-- Mermaid labels avoid parentheses and use `<br/>` instead of `\n`.
-- State semantics table exists for stateful stores and includes Producer/Consumers/Example.
-- Module state tables list full keys touched with access level and example values.
-- Module docs reflect actual boundaries and responsibilities.
-- Mechanism specs exist for non-trivial decision logic and are linked from design, module, and architecture docs.
-- Mechanism specs include narrative overview and decision rules with purpose, inputs, steps, state updates, outputs, and edge cases.
-- Input/config parameters map to decision rules (input coverage matrix).
-- User docs link to dev interfaces instead of repeating IO details.
-- Scenario index aligns with API overview table.
-- Change log or devlog updated when public behavior changes.
-- Glossary/term usage is consistent across user and dev docs.
-- Terms used in mechanism specs appear in the glossary.
-- Mechanism specs include math-level and real-world examples.
-- Versioning and stability labels are present where required.
+## Navigation
+- Root README and docs index exist when the repo needs them.
+- Major layers have index pages.
+- Project status or equivalent fact-source index points to current owners.
+- No links point to removed paths.
+- Old names and old paths do not remain in active docs.
+
+## Entrypoints
+- Public CLI/API/SDK/UI/config/schema/job/table/queue/script entrypoints are inventoried.
+- Lifecycle coverage matrix maps entrypoints to user docs, design/contract source, and validation evidence.
+- Examples are runnable or explicitly labeled pseudo/conditional with preconditions.
+- Defaults, required fields, and errors match code behavior.
+
+## Layer Boundaries
+- Architecture docs contain stable boundaries, data flow, diagrams, and tradeoffs.
+- Manual docs contain usage, configuration, operations, lifecycle, and troubleshooting.
+- Dev docs contain contracts, implementation constraints, config semantics, and extension rules.
+- Scenario docs contain concrete vendors/sources/tasks/tables/examples and acceptance evidence.
+- One fact has one owner; other pages link to it.
+
+## Architecture And Mechanisms
+- Architecture diagrams align with current modules and text.
+- Module runtime/data dependency diagrams match actual state stores and entrypoints when present.
+- Mechanism specs exist for non-trivial decision logic.
+- Mechanism specs include terms, inputs, steps, state updates, outputs, edge cases, examples, and observability.
+- Terms used in mechanism specs appear in glossary/reference docs when those exist.
+
+## Storage And State
+- Storage overview exists when persistent storage is material.
+- Per-table docs include columns, nullability/defaults, keys/indexes, relationships, lifecycle, quality rules, and example rows when table-level details matter.
+- State semantics include producer, consumers, meaning, and example when state is part of behavior.
+
+## Drift Controls
+- AGENTS/project rules reflect the current doc layers and update triggers.
+- Change-sync rules exist for CLI/API/config/schema/migration/runtime changes.
+- Generated or untracked artifacts are not the only durable evidence for conclusions.

@@ -10,12 +10,12 @@ Do not repeat the full lifecycle; keep this page focused.
 - Auth/config required.
 - Required environment state.
 
-## Interfaces in this phase
-> Must include every interface used in this phase and mark runnable status.
+## Entrypoints in this phase
+> Must include every public entrypoint used in this phase and mark runnable status.
 
-| Interface | Role | Runnable? | Preconditions / Notes | Link |
-|----------|------|-----------|-----------------------|------|
-| <module.Class.method> | <role> | <yes/no/conditional> | <constraints> | <doc link> |
+| Entrypoint | Role | Runnable? | Preconditions / Notes | Design / Contract Source | Validation Evidence |
+| --- | --- | --- | --- | --- | --- |
+| <entrypoint> | <role> | <yes/no/conditional> | <constraints> | <doc link> | <command/test/link> |
 
 ## Steps (annotated)
 1) **<step name>**
@@ -23,7 +23,7 @@ Do not repeat the full lifecycle; keep this page focused.
    **Inputs**: <key params>
    **Output**: <return shape>
    **State change**: <state transition or side effects>
-   **Why this interface**: <role in lifecycle>
+   **Why this entrypoint**: <role in lifecycle>
    **Runnable**: <yes/no/conditional>
    **Preconditions**: <assumptions/limits>
 
@@ -35,8 +35,8 @@ Do not repeat the full lifecycle; keep this page focused.
 ```
 
 ## Error + recovery path
-- <error> -> <recovery interface> -> <post state>
+- <error> -> <recovery entrypoint> -> <post state>
 
 ## Related docs
 - <Lifecycle index>
-- <Interface contracts>
+- <Dev contracts>

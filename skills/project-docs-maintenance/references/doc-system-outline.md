@@ -1,62 +1,70 @@
 # Documentation System Outline
 
+Use this as a starting shape, not a mandatory tree. Adapt names to the repo.
+
 ## Common goals
-- Fast user onboarding and easy lookup.
-- Precise developer contracts and boundaries.
-- Clear mapping to code entrypoints.
+- Users find the shortest correct path to first success.
+- Developers find exact contracts, invariants, and extension rules.
+- Operators find runbooks and recovery paths.
+- Stable decisions have one durable source of truth.
+- Navigation maps every public entrypoint to usage docs, design/contract docs, and validation evidence.
 
-## S scope (small project)
-- README.md: quickstart + minimal examples + links.
-- docs/user/index.md
-- docs/user/quickstart.md
-- docs/user/api-overview.md
-- docs/dev/architecture.md: short overview of modules and data flow.
-- docs/dev/interfaces/: core entrypoints only.
+## Recommended partition
 
-## M scope (medium project)
-- S scope, plus:
-- docs/index.md: layered navigation and doc map.
-- docs/user/scenario-index.md
-- docs/user/troubleshooting.md
-- docs/dev/modules/: module-level docs with directory layout.
-- docs/dev/contracts/: cross-module contracts.
-- docs/ops/RUNBOOK.md: operations and troubleshooting.
-- CHANGELOG.md or docs/devlog.md: change tracking.
+```text
+README.md                    # repository entrypoint
+docs/
+  README.md                  # documentation map
+  project-status.md          # current phase and fact-source index, when useful
+  prd/                       # product goals and acceptance criteria
+  architecture/              # stable boundaries, components, data flow, tradeoffs
+  manual/                    # setup, quickstart, lifecycle, operations, troubleshooting
+  dev/                       # contracts, implementation design, config governance
+  scenarios/                 # concrete examples, instances, acceptance evidence
+  ops/                       # deployment, runbooks, incident response
+  reference/                 # glossary, conventions, shared schemas
+  archive/                   # superseded docs
+```
 
-## L scope (large project)
-- M scope, plus:
-- docs/dev/design/: mechanisms, state flows, and invariants.
-- docs/dev/interfaces/index.md: full interface index.
-- docs/reference/: glossary, conventions, structure.
-- docs/ops/troubleshooting.md
-- docs/ops/handoff.md
+## Scope guide
+
+Small:
+- root README;
+- docs index;
+- quickstart/manual page;
+- architecture overview;
+- core contracts or API overview.
+
+Medium:
+- Small plus lifecycle coverage matrix;
+- scenario index;
+- troubleshooting;
+- dev contracts and config docs;
+- storage overview if persistence exists.
+
+Large:
+- Medium plus module docs;
+- mechanism specs;
+- storage domains and per-table docs;
+- reference conventions;
+- ops runbook and handoff;
+- archive/migration plan.
+
+## Layer ownership rules
+
+- Architecture owns stable boundaries and diagrams.
+- Manual owns executable usage paths.
+- Dev owns strict IO/config/error contracts and implementation constraints.
+- Scenarios own concrete vendors, markets, tasks, topic names, tables, fixtures, acceptance data.
+- Project status owns current phase and fact-source index.
+- Reference owns shared terms and conventions.
+
+If a section answers more than one layer's question, split it.
 
 ## Required navigation
-- Index page lists user docs first, then ops, then design/PRD.
-- Each doc includes a short Related links section.
 
-## Recommended doc partition
-- docs/index.md as the single entry.
-- docs/user/: user onboarding, overview, API overview, scenarios.
-- docs/dev/: architecture, modules, contracts, PRD, mechanisms.
-- docs/ops/: runbook, troubleshooting.
-- docs/reference/: structure, glossary, conventions.
-- docs/archive/: historical docs.
-
-## User docs (minimal, low-duplication)
-- index.md: user navigation and entry points only.
-- quickstart.md: shortest path to first success.
-- scenario-index.md: tasks to entrypoints and examples.
-- api-overview.md: entrypoint overview + API scan table.
-- troubleshooting.md: common issues and self-checks.
-- Optional: feature guides for high-frequency tasks only.
-- Optional: lifecycle examples for complex modules (full interface walkthroughs).
-- Optional: docs/user/lifecycle/index.md + docs/user/lifecycle/<phase>.md when split is required.
-
-## Reference docs (shared definitions)
-- glossary.md: canonical term definitions.
-- conventions.md: naming, formats, and placeholder rules.
-- structure.md: doc layout and ownership.
-
-## Ops structure guidance
-- Use references/ops-doc-structure.md to choose the ops layout and split rules.
+- Root entry points to docs index, project status, architecture, manual, and dev docs.
+- Docs index explains layers and links to the most common reading paths.
+- Each major layer has an index page.
+- Lifecycle pages include an entrypoint coverage matrix:
+  `Entrypoint | User Doc | Design / Contract Source | Validation Evidence`.

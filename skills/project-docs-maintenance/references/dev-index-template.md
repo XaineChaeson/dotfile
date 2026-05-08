@@ -1,23 +1,35 @@
-# Dev Docs Index
+# Dev Docs Index Template
 
-One-paragraph summary of developer-facing documentation and where to start.
+One-paragraph summary of developer-facing documentation and where to start. Do not place architecture rationale or user tutorials here unless this repo intentionally has no separate layer.
 
-## Architecture and system view
-- Architecture: `docs/dev/architecture.md`
-- Design docs: `docs/dev/design/` (if present)
+## Developer Reading Order
 
-## Modules and boundaries
-- Modules index: `docs/dev/modules/index.md`
-- Contracts: `docs/dev/contracts/`
+1. Architecture boundary: `<architecture module doc>`
+2. Implementation design: `<implementation design>`
+3. Contracts: `<contracts path>`
+4. Config/schema governance: `<config or persistence docs>`
+5. Scenario / acceptance evidence: `<scenario path>`
 
-## Interfaces and IO
-- Interface index: `docs/dev/interfaces/index.md`
-- Adapter deltas: `docs/dev/adapters/` (if present)
+## Engineering References
 
-## Reference
-- Glossary and conventions: `docs/reference/`
+| Document | Purpose |
+| --- | --- |
+| `<implementation design>` | directories, runtime shape, module ownership, implementation sequencing |
+| `<contracts>` | IO, errors, validation rules, extension points |
+| `<config contract>` | env/config/default/error semantics |
+| `<storage contract>` | table descriptor, schema, lifecycle, migrations |
+| `<interface index>` | public API/CLI/SDK entrypoints, if split |
 
-## Related docs
-- User docs: `docs/user/index.md`
-- Ops runbook: `docs/ops/RUNBOOK.md`
-- Change log: `CHANGELOG.md` or `docs/devlog.md`
+## Drift Rules
+
+- Public entrypoint changes update manual lifecycle coverage.
+- Config changes update manual configuration and dev config contract.
+- Schema/migration changes update storage docs and scenarios.
+- Boundary/data-flow changes update architecture diagrams.
+
+## Related Docs
+
+- Architecture: `<architecture index>`
+- Manual: `<manual index>`
+- Scenarios: `<scenario index>`
+- Operations: `<ops index>`

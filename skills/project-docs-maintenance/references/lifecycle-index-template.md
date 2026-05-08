@@ -10,11 +10,11 @@ still expose full coverage and a runnable happy-path subset without deep navigat
 - Scope: <what this walkthrough covers>
 - Non-goals: <what it does not cover>
 
-## Coverage matrix
-> Must cover all public entrypoints from `docs/dev/interfaces/*`.
-| Area | Lifecycle page | Entrypoints | Notes |
-|------|----------------|------------|-------|
-| <module/product> | <link> | <list> | <notes> |
+## Coverage Matrix
+> Must cover all relevant public entrypoints discovered from code, config, docs, and tooling.
+| Area | Lifecycle page | Entrypoints | Design / Contract Source | Validation Evidence | Notes |
+| --- | --- | --- | --- | --- | --- |
+| <module/product> | <link> | <list> | <doc links> | <commands/tests> | <notes> |
 
 ## Lifecycle sequence (summary)
 1) <init>
@@ -37,5 +37,6 @@ still expose full coverage and a runnable happy-path subset without deep navigat
 - <top failure mode and recovery entrypoint>
 
 ## Related docs
-- <API overview>
-- <Interface contracts>
+- <Manual index>
+- <Architecture>
+- <Dev contracts>

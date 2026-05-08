@@ -1,114 +1,71 @@
 # Lifecycle Example Template
 
-Use this to show a full module lifecycle: all public entrypoints, call order,
-and each interface's role in the lifecycle. Provide full coverage plus a runnable
-happy-path subset.
+Use this to document a full lifecycle for a module/product/role: public entrypoints, call/run order, states, and verification. Provide full coverage plus a runnable happy-path subset.
 
 ## Goal
+
 - <User goal in one sentence>
 
 ## Scope / Non-goals
+
 - Scope: <what this walkthrough covers>
 - Non-goals: <what it does not cover>
 
-## Coverage rules
-- Include every public entrypoint from `docs/dev/interfaces/*`.
+## Coverage Rules
+
+- Include every relevant public entrypoint discovered from code/docs/tooling: CLI commands, API routes, SDK exports, UI flows, config files, env keys, migrations, queues, tables, jobs, scripts, or hooks.
 - If a step is conditional or not directly runnable, label it and explain preconditions.
 
 ## Preconditions
+
 - Auth/config required.
 - Required environment state.
 - Required setup steps.
 
-## Interface coverage (must be complete)
-| Interface | Phase | Role in lifecycle | Runnable? | Preconditions / Notes | Link |
-|----------|-------|-------------------|-----------|-----------------------|------|
-| <module.Class.method> | <init/setup/run/teardown> | <why it exists> | <yes/no/conditional> | <constraints> | <doc link> |
+## Entrypoint Coverage
 
-## Lifecycle flow (diagram)
-> Use a flowchart to show the overall lifecycle. Include every public entrypoint
-> at least once; use dashed edges for conditional or error flows. Quote node
-> labels to avoid Mermaid parse errors with parentheses or symbols.
+| Entrypoint | Phase | Role in lifecycle | Runnable? | Preconditions / Notes | Design / Contract Source | Validation Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| `<entrypoint>` | `<setup/run/observe/recover>` | `<why it exists>` | `<yes/no/conditional>` | `<constraints>` | `<doc link>` | `<command/test/link>` |
+
+## Lifecycle Flow
 
 ```mermaid
 flowchart TD
-  A["Init: <module.init>"] --> B["Setup: <module.prepare>"]
-  B --> C["Run: <module.execute>"]
-  C --> D["Teardown: <module.close>"]
-  B -. conditional .-> E["Optional: <module.warmup>"]
-  C -. error .-> F["Recovery: <module.rollback>"]
+  A["Setup"] --> B["Validate"]
+  B --> C["Run"]
+  C --> D["Observe"]
+  C -. error .-> E["Recover"]
 ```
 
-## Lifecycle steps (index list)
-> Short, ordered list that mirrors the diagram and covers all public entrypoints.
+## Runnable Happy Path
 
-| # | Phase | Interface | Role (short) | Output | Runnable | Preconditions | Link |
-|---|-------|-----------|--------------|--------|----------|---------------|------|
-| 1 | Init | `<module.init(config)>` | <why it exists> | <return shape> | <yes/no/conditional> | <assumptions/limits> | <doc link> |
-| 2 | Setup | `<module.prepare(handle, options)>` | <why it exists> | <return shape> | <yes/no/conditional> | <assumptions/limits> | <doc link> |
-| 3 | Run | `<module.execute(handle, payload)>` | <why it exists> | <result> | <yes/no/conditional> | <assumptions/limits> | <doc link> |
-| 4 | Teardown | `<module.close(handle)>` | <why it exists> | <result> | <yes/no/conditional> | <assumptions/limits> | <doc link> |
-
-## Runnable happy-path subset (minimal)
-> Keep this strictly runnable and minimal; no conditional branches.
-
-```pseudo
-# Happy-path (minimal, runnable)
-ctx = Module.init(config)
-Module.prepare(ctx, options)
-result = Module.execute(ctx, payload)
-Module.close(ctx)
+```bash
+<minimal runnable path>
 ```
 
-## Lifecycle example (code, full coverage)
-> Use runnable-first code to cover as many entrypoints as possible. Every public
-> entrypoint must appear at least once (happy path or conditional). Mark any
-> non-runnable lines as conditional or pseudo.
+## Full Walkthrough
 
-```pseudo
-# Full lifecycle example (runnable-first, full coverage)
-config = load_config()
-ctx = Module.init(config)
+| # | Phase | Entrypoint | Action | Expected Output | Failure / Recovery |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Setup | `<entrypoint>` | `<action>` | `<observable result>` | `<recovery>` |
 
-# optional preflight (conditional)
-if config.preflight_enabled:
-    Module.preflight(ctx)
+## Conditional Paths
 
-Module.prepare(ctx, options)
-
-# optional warmup (conditional)
-if options.warmup:
-    Module.warmup(ctx)
-
-try:
-    result = Module.execute(ctx, payload)
-
-    # optional follow-up (conditional)
-    if result.needs_sync:
-        Module.sync(ctx, result)
-except ModuleError as err:
-    # recovery paths (conditional)
-    if err.is_retriable:
-        Module.retry(ctx, err)
-    else:
-        Module.rollback(ctx)
-    raise
-finally:
-    Module.close(ctx)
-```
-
-## Error + recovery path
-- <error in setup> -> <rollback interface> -> <state after rollback>
-- <error in run> -> <retry/compensate interface> -> <state after recovery>
+- <condition> -> <entrypoint> -> <expected state>
 
 ## Cleanup / Idempotency
+
 - What must be cleaned up.
-- Which interfaces are safe to retry.
+- Which entrypoints are safe to retry.
 
-## Observability (optional)
-- Key logs/metrics per phase.
+## Observability
 
-## Related docs
-- <API overview>
-- <Interface contracts>
+- Key logs, metrics, state rows, artifacts, or UI signals per phase.
+
+## Related Docs
+
+- <Manual index>
+- <Architecture>
+- <Dev contract>
 - <Config reference>
