@@ -1,232 +1,206 @@
 ---
 name: refactor-playbook
-description: Use when asked to plan or execute codebase refactors, set up a repeatable refactor workflow, or apply refactor principles with explicit risk control.
+description: Use when planning or executing refactors involving structural debt, unclear ownership, boundary leakage, duplicated flows, stale compatibility paths, or architecture/code organization drift.
 metadata:
-  short-description: Technical debt reduction + complexity control
+  short-description: Structural refactoring and complexity control
 ---
 
 # Refactor Playbook
 
-Use this skill to reduce technical debt and complexity while preserving delivery velocity.  
-This playbook is not only about changing code shape. It is about removing structural drag.
+Use this skill to remove structural drag, not just reshape code.
 
-## Core Objective
-
-- Primary: reduce technical debt.
-- Secondary: improve readability and maintainability.
-- Constraint: avoid introducing new hidden complexity.
-
-A refactor is not complete unless complexity is lower than before.
+Core principle: a refactor is complete only when necessary behavior is preserved, unnecessary complexity is removed, and future changes require fewer concepts, branches, and files.
 
 ## When To Use
 
-- Planning or executing refactors of any scale.
-- Repeated complexity in the same area slows feature work.
-- Existing contracts or abstractions now create coupling or confusion.
-- Team conventions and implementation have started to drift.
+- Code organization makes the system hard to explain or extend.
+- A module mixes parsing, validation, routing, execution, persistence, and presentation.
+- Public APIs, CLIs, configs, docs, or schemas expose implementation details.
+- The same fact can be changed through multiple write paths.
+- The same data is reshaped repeatedly across layers.
+- Stale aliases, legacy branches, or dual schemas create semantic drift.
+- Existing abstractions increase indirection without reducing decisions.
 
 ## When Not To Use
 
-- Pure feature work with local, clear changes.
+- Pure feature work with a local, clear implementation path.
 - Isolated bug fixes without structural symptoms.
+- Formatting-only cleanup with no ownership or complexity issue.
+
+## First-Principles Lens
+
+Before choosing a design, answer the smallest useful set of these questions:
+
+1. **User contract**: who relies on this behavior, and what must remain true for them?
+2. **Internal mechanism**: which concepts are implementation details that should not leak into public APIs, configs, CLIs, or docs?
+3. **Fact source**: which data is authoritative, derived, cached, or runtime-only?
+4. **Write ownership**: which component is allowed to create, validate, mutate, or delete each fact?
+5. **Flow ownership**: which layer owns parsing, validation, planning, execution, persistence, and presentation?
+6. **Necessary complexity**: what complexity comes from real domain rules, and what comes from code organization?
+7. **Compatibility reality**: which old paths are real rollout constraints, and which are development residue?
+8. **Proof**: what is the smallest real check that proves the new boundary or invariant works?
+
+If these answers are unclear, do not start by extracting helpers. First clarify ownership, source of truth, and public surface.
 
 ## Debt Model
 
-Classify debt before changing code. Use one or more buckets.
+Classify the debt before changing code. Use one or more buckets.
 
-- Structural debt: boundary leakage, layer violations, duplicated modules.
-- Data debt: mixed field semantics, unstable payloads, repeated reshaping.
-- Behavioral debt: branch explosion, hidden side effects, non-deterministic flows.
-- Compatibility debt: stale aliases, legacy paths, double schemas with no sunset.
-- Documentation debt: implementation no longer matches contracts or guides.
-
-## Complexity Signals
-
-- The same data is transformed repeatedly across layers.
-- A field is used for multiple meanings.
-- Service/orchestration layers hold domain-specific logic.
-- New work requires touching many unrelated files.
-- Naming and contracts drift from implementation over time.
+- **Structural debt**: boundary leakage, oversized modules, layer violations, duplicated modules.
+- **Contract debt**: public contracts reflect implementation details or outdated concepts.
+- **Source-of-truth debt**: multiple write paths, unclear authority, mixed config/runtime/cache state.
+- **Ownership debt**: no clear owner for validation, mutation, persistence, or presentation.
+- **Flow debt**: repeated reshaping, scattered branching, orchestration layers holding domain logic.
+- **Behavioral debt**: hidden side effects, non-deterministic flows, implicit defaults.
+- **Compatibility debt**: stale aliases, legacy routes, dual schemas without a sunset rule.
+- **Verification debt**: tests or docs cannot prove the boundary that matters.
 
 ## Refactor Depth Levels
 
-Pick the minimum depth needed; escalate only with explicit justification.
+Pick the minimum level that can remove the diagnosed debt. Escalate only when the lower level cannot fix the root cause.
 
-- **Level 1: Hygiene**: rename for clarity, remove dead code, reduce nesting.
-- **Level 2: Structural**: isolate responsibilities, split modules, remove duplicated paths.
-- **Level 3: Architectural**: redesign boundaries, contracts, and ownership models.
+### Level 1: Hygiene
 
-Always declare depth before starting and tie it to debt categories.
+Use for local readability issues where ownership and contracts are already correct.
 
-## Contract Principle
+- Examples: clearer names, dead code deletion, reduced nesting, local helper extraction.
+- Do not change public behavior, source of truth, or cross-module ownership.
+- Required output: scope, debt removed, before/after complexity note, verification evidence.
+- Stop if the issue turns out to be boundary or ownership debt; escalate to Level 2.
 
-Contracts are tools, not sacred artifacts.
+### Level 2: Structural
 
-- If a contract keeps boundaries clear and complexity low, stabilize it.
-- If a contract causes coupling, mixed semantics, or repeated reshaping, refactor it.
-- Do not preserve harmful contracts in the name of stability.
-- Avoid long-lived dual contracts unless there is a hard rollout constraint.
+Use when code organization, module boundaries, or flow ownership are wrong but the user-facing contract can stay mostly stable.
 
-## Invariants And Ownership
+- Examples: split mixed-responsibility modules, isolate adapters, collapse duplicate paths, move validation to the owner, hide internal mechanisms.
+- Define ownership for create/validate/transform/execute/persist/present responsibilities.
+- Reduce at least one measurable complexity budget item.
+- Required output: first-principles answers, ownership changes, complexity budget, verification evidence.
+- Stop if the public contract or core architecture is the debt source; escalate to Level 3.
 
-Define invariants before edits:
+### Level 3: Architectural
 
-- Which structures are produced by which layer.
-- Which layers may append context.
-- Which layers are forbidden to reinterpret or branch on specific fields.
+Use when the current contract, source-of-truth model, or core boundary causes the debt.
 
-Use a simple ownership matrix:
+- Examples: redesign a public contract, consolidate authoritative storage, remove harmful compatibility models, change runtime/control-plane boundaries.
+- Preserve necessary external behavior, not harmful internal contracts.
+- Document compatibility decisions explicitly: keep, migrate, sunset, or delete.
+- Required output: decision log, source-of-truth model, public-surface changes, risk plan, verification evidence.
 
-- `owned_by_layer`: fields this layer can set/change.
-- `append_only`: fields this layer may add but not rewrite upstream values.
-- `read_only`: fields this layer can consume only.
+## Target Shape Patterns
 
-## Workflow
+Use these patterns when they reduce real decisions for future callers.
 
-1) Read repository constraints and architecture docs.
-2) Declare depth level and debt categories in scope.
-3) Inventory entry points, call paths, contracts, tests, and docs.
-4) Create a baseline complexity budget.
-5) Define invariants and field/layer ownership.
-6) Decide whether contracts should be stabilized or redesigned.
-7) Refactor in small batches that reduce debt measurably.
-8) Remove obsolete paths and dead compatibility layers.
-9) Verify each batch (tests + targeted behavior checks).
-10) Sync docs/contracts/storage mappings to implementation.
-11) Produce a debt ledger and residual risk list.
+- **Thin Entrypoint**: entrypoints parse and route; owners perform business logic.
+- **Single Source Of Truth**: each fact has one authority and one controlled write path.
+- **Adapter Boundary**: shared mechanics stay common; domain interpretation stays in the owning module.
+- **Internal Mechanism Hiding**: implementation details stay behind private modules, adapters, or typed interfaces.
+- **Ownership Reassignment**: move validation, mutation, or persistence to the component that owns the invariant.
+- **Flow Alignment**: data flow and control flow follow the same responsibility model.
+- **Compatibility Collapse**: delete stale aliases and paths unless a real rollout constraint exists.
+- **Delete Before Abstracting**: remove duplicate paths before adding a new abstraction.
 
 ## Complexity Budget
 
-Track before/after metrics suitable for the refactor scope, for example:
+Track before/after metrics that match the debt. Useful metrics include:
 
-- Number of transformation hops for the same payload.
-- Number of branching points in critical flow.
-- Number of modules participating in a single behavior.
-- Number of duplicate builders/parsers for the same structure.
+- Number of public entrypoints for one behavior.
+- Number of write paths for one fact.
+- Number of transformation hops for one payload.
+- Number of branching points in the critical flow.
+- Number of modules that must change for one feature.
+- Number of duplicated builders, parsers, validators, or adapters.
+- Number of stale aliases, legacy routes, or dual schemas.
+- Number of cross-layer imports or domain-specific branches in orchestration code.
 
-If budget does not improve, the refactor is incomplete.
+If no meaningful budget improves, the refactor is incomplete or the wrong debt was targeted.
 
-## Guardrails
+## Workflow
 
-- Preserve required behavior unless behavior change is explicitly approved.
-- Keep observability stable or improve it.
-- Minimize surprise in runtime and operational semantics.
-- Prefer deleting complexity over moving it.
+1. Read local repository constraints and current architecture notes.
+2. Declare level, debt categories, scope, non-goals, and verification baseline.
+3. Apply the First-Principles Lens to identify contract, fact source, ownership, and proof.
+4. Inventory entrypoints, call paths, data flow, write paths, tests, and docs.
+5. Define the target shape and complexity budget.
+6. Refactor in reversible batches split by flow, boundary, or ownership.
+7. Delete obsolete paths and stale compatibility layers when no real constraint requires them.
+8. Verify each batch with checks that prove the changed boundary or invariant.
+9. Sync docs, examples, schemas, and generated references when public behavior changes.
+10. Report debt removed, debt retained, evidence, and residual risk.
 
-If a guardrail must be violated, record decision + risk + rollback.
+## Contract And Compatibility Rules
+
+- Preserve necessary user-facing behavior unless the user approves a behavior change.
+- Do not preserve harmful internal contracts just because they are old.
+- Do not keep aliases, dual paths, or old schemas without a real rollout constraint.
+- If compatibility must remain, name the owner, sunset condition, and verification path.
+- Unknown defaults and hidden fallbacks are debt unless the project contract explicitly allows them.
 
 ## Verification
 
-- Run the most relevant tests per batch.
-- Add focused tests where boundaries or contracts changed.
-- If tests are weak, add lightweight checks (goldens, snapshots, scripted assertions).
-- Verify docs and contracts are consistent with live code paths.
+Choose verification based on the claim:
+
+- Hygiene claim: run focused tests, lint/typecheck, or targeted smoke checks.
+- Boundary claim: test the caller-to-owner path and the forbidden bypass path if possible.
+- Source-of-truth claim: verify reads and writes hit the intended authority.
+- Contract claim: verify public API/CLI/config/docs examples against live behavior.
+- Compatibility claim: verify both current and sunset paths, or delete the obsolete path.
+- Weak-test baseline: add small goldens, snapshots, scripted assertions, or scenario checks before large edits.
+
+Prefer the smallest real scenario that proves the invariant. Do not replace structural proof with large-volume work unless volume is the risk.
 
 ## Artifacts
 
-Produce explicit outputs for handoff and future refactors.
+Scale artifacts to risk. Keep them concise and auditable.
 
-- Refactor decision log (scope, depth, reasoning).
-- Debt ledger:
-  - debt removed
-  - debt intentionally retained
-  - rationale and follow-up trigger
-- Complexity budget before/after.
-- Contract ownership matrix.
-- Verification evidence.
+- **Fast**: scope, level, debt removed, verification evidence.
+- **Standard**: first-principles summary, ownership changes, complexity budget before/after, residual risks.
+- **Deep**: decision log, source-of-truth model, compatibility plan, risk plan, verification matrix.
 
-## Batch Strategy
-
-- Split by call path to keep impact reviewable.
-- Split by contract boundary for data-flow changes.
-- Split by layer ownership to avoid cross-layer confusion.
-- Keep each batch reversible.
-
-## Risk Guidance
-
-- Low: local cleanup, clear ownership, tests cover behavior.
-- Medium: shared modules or contract changes with bounded impact.
-- High: architecture-wide contract redesign or weak verification baseline.
-
-For high risk, reduce batch size and increase verification density.
+Detailed templates and checklists: `references/REFACTOR_SOP_REFERENCE.md`.
 
 ## Anti-Patterns To Avoid
 
-- Refactor that only renames files but keeps coupling intact.
-- Adding wrappers that increase shape-shifting without reducing debt.
+- Moving files while preserving the same coupling.
+- Adding wrappers or managers that increase indirection without reducing decisions.
+- Letting orchestration layers absorb domain rules.
+- Exposing internal mechanisms through public contracts.
 - Keeping legacy compatibility paths indefinitely.
-- Allowing service/orchestration layers to absorb domain logic.
-- Treating unchanged contracts as success when they are the debt source.
+- Creating multiple write paths for the same fact.
+- Treating unchanged contracts as success when the contract is the debt source.
+- Running broad tests that do not prove the changed invariant.
 
 ## Exit Criteria
 
 A refactor is complete only when all are true:
 
+- The diagnosed root cause was addressed at the chosen level.
 - Complexity budget improved.
-- Layer boundaries are clearer and enforceable.
-- Contracts match implementation and reduce ambiguity.
-- Tests/docs are updated and passing.
-- Residual debt is explicit (not implicit).
-
-## Rollback
-
-- Keep batches small and reversible.
-- Keep a clear rollback note for each non-trivial batch.
-
-## References
-
-- Detailed templates and checklists: `references/REFACTOR_SOP_REFERENCE.md`
+- Ownership and source-of-truth rules are clearer and enforceable.
+- Public contracts and internal mechanisms are separated.
+- Required tests/checks/docs were updated and verified.
+- Obsolete paths were deleted or given an explicit sunset rule.
+- Residual debt is explicit and actionable.
 
 ## Quick Execution Template
 
-Use this template to keep output quality consistent without adding process overhead.
-
-### Input Block (fill before work)
+### Input
 
 - Scope:
-- Depth level (1/2/3):
-- Debt categories in scope:
+- Level (1/2/3) and reason:
+- Debt categories:
+- First-principles findings:
 - Non-goals:
-- Constraints (runtime/config/compatibility):
+- Compatibility constraints:
 - Verification baseline:
 
-### Output Block (must provide at handoff)
+### Output
 
 - Changes made:
 - Debt removed:
-- Debt retained (with reason):
+- Target shape reached:
 - Complexity budget before/after:
-- Contract/boundary changes:
+- Ownership/source-of-truth changes:
+- Compatibility decisions:
 - Verification evidence:
 - Residual risks:
-
-## Stability Checklist (10-Point)
-
-Before declaring completion, confirm all items:
-
-1) Scope stayed within declared debt categories.
-2) Complexity budget improved.
-3) No new redundant transformation layer was introduced.
-4) Layer ownership is clearer than before.
-5) Contracts and implementation are aligned.
-6) Compatibility paths were removed or explicitly sunset.
-7) Tests/checks cover changed seams.
-8) Documentation reflects actual behavior.
-9) Residual debt is explicit and actionable.
-10) Rollback path is clear for non-trivial changes.
-
-## Lightweight Modes
-
-Use one mode based on task size to avoid over-process:
-
-- `Fast` (small/local): Input Block + 10-point checklist only.
-- `Standard` (most refactors): Input/Output Blocks + checklist.
-- `Deep` (architectural): full workflow + debt ledger + complexity metrics + contract ownership matrix.
-
-## User Experience Rule
-
-Keep collaboration lightweight:
-
-- Do not force full artifacts for trivial changes.
-- Scale process depth to refactor risk.
-- Prefer concise, auditable outputs over long narrative reports.

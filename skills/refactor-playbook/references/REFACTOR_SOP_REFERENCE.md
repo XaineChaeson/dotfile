@@ -1,91 +1,162 @@
 # Refactor Playbook Reference
 
+Use this reference only when the main playbook needs concrete templates or checklists.
+
 ## Entry Checklist
 
-- Read repo constraints and contribution guidelines.
-- Confirm scope (directories, services, modules).
-- Capture current test/verification status.
-- Confirm refactor depth level and resolve any required decisions before work starts.
+- Read local agent, contribution, architecture, and documentation constraints.
+- Confirm scope: directories, modules, services, public surfaces, and non-goals.
+- Capture current verification status and known weak spots.
+- Declare refactor level and debt categories before editing.
+- Identify whether the goal is hygiene, structural boundary repair, or architectural contract repair.
 
-## Inventory Checklist
+## First-Principles Worksheet
 
-- Entry points: CLI, jobs, HTTP handlers, event consumers.
-- Core flows: main request/processing paths and side effects.
-- Observability map: logs, metrics, traces used for ops.
-- Tests map: coverage and known gaps.
+- User contract: who depends on the behavior, and what must remain true?
+- Public surface: which APIs, CLIs, configs, schemas, docs, or events expose this behavior?
+- Internal mechanism: which concepts should remain private implementation details?
+- Fact source: which data is authoritative, derived, cached, or runtime-only?
+- Write path: which component can create, update, delete, or migrate the fact?
+- Flow owner: who owns parsing, validation, planning, execution, persistence, and presentation?
+- Necessary complexity: which branches come from real domain rules?
+- Accidental complexity: which branches come from history, coupling, or duplicate paths?
+- Compatibility: which old paths are real rollout constraints, and which are stale residue?
+- Proof: what smallest real check proves the new invariant?
 
-## Refactor Heuristics
+## Structural Diagnosis Checklist
 
-- Split large functions into focused helpers.
-- Reduce deep nesting with early exits.
-- Extract shared logic to remove duplication.
-- Avoid behavior or contract changes without explicit approval.
-- Keep observability stable unless explicitly approved.
+- Does one module own multiple unrelated reasons to change?
+- Does an entrypoint contain business logic instead of routing to an owner?
+- Does orchestration code branch on domain-specific fields?
+- Can the same fact be written or interpreted through multiple paths?
+- Is a field or type used for more than one meaning?
+- Is data repeatedly reshaped between layers?
+- Are public contracts named after implementation details?
+- Are adapters, helpers, or managers adding decisions instead of removing them?
+- Do tests prove implementation details while missing boundary behavior?
+- Are docs/examples describing a path different from live code?
 
-## Verification Tactics (Minimal)
+## Ownership Matrix Template
 
-- Golden outputs: capture baseline outputs before changes.
-- Diff snapshots: compare outputs or serialized results after changes.
-- Focused scripts: run one or two core paths repeatedly.
+Use this for Level 2 and Level 3 refactors.
 
-## Minimal Verification Checklist
+| Concern | Current owner | Target owner | Allowed operations | Forbidden operations |
+| --- | --- | --- | --- | --- |
+| Parse input |  |  |  |  |
+| Validate contract |  |  |  |  |
+| Create authoritative fact |  |  |  |  |
+| Transform derived data |  |  |  |  |
+| Execute side effects |  |  |  |  |
+| Persist state |  |  |  |  |
+| Present output |  |  |  |  |
 
-- Baseline captured for a known input or flow.
-- One repeatable check script or command documented.
-- Output/behavior comparison method defined (diff, snapshot, logs).
-- Smoke path executed after each batch.
+## Source-Of-Truth Template
 
-## Batch Strategy
+| Fact/state | Authority | Readers | Writers | Derived/cached copies | Verification |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
 
-- Call path batches: refactor one entry path at a time.
-- Surface batches: keep the behavior slice small and reviewable.
-- Structure batches: isolate a module or layer before deeper changes.
+Rules:
 
-## Batch Split Example (Template)
+- One fact should have one authority.
+- Derived copies must identify their source and refresh path.
+- Runtime state and configuration state should not share write semantics unless that is the explicit contract.
 
-- Target scope: <module/path>
-- Entry path: <CLI/HTTP/worker/queue>
-- Behavior slice: <describe small user/system behavior>
-- Expected invariants: <must remain true>
-- Verification: <tests/checks run>
+## Complexity Budget Examples
 
-## Risk Levels
+Choose metrics that match the debt.
 
-- Low: local refactor, behavior unchanged, easy to verify.
-- Medium: shared logic or multiple callers; add checks.
-- High: broad behavior surface or weak verification; reduce batch size.
+- Public entrypoints for one behavior: before `<n>`, after `<n>`.
+- Write paths for one fact: before `<n>`, after `<n>`.
+- Transformation hops for one payload: before `<n>`, after `<n>`.
+- Critical-flow branch points: before `<n>`, after `<n>`.
+- Files touched for one common feature: before `<n>`, after `<n>`.
+- Duplicate parser/builder/validator implementations: before `<n>`, after `<n>`.
+- Stale aliases or compatibility paths: before `<n>`, after `<n>`.
+- Cross-layer imports or domain branches in orchestration: before `<n>`, after `<n>`.
 
 ## Depth Selection Cues
 
-- Level 1 (Hygiene): rename, extract helpers, reduce nesting, remove dead code.
-- Level 2 (Structural): split modules, isolate side effects, introduce seams for testing.
-- Level 3 (Architectural): redesign boundaries or core abstractions.
-- Declare the depth level before starting and justify any escalation.
+- **Level 1: Hygiene**
+  - Symptoms: local naming, dead code, nested logic, small duplication.
+  - Root cause: local readability.
+  - Avoid: changing ownership, public contracts, or fact sources.
+
+- **Level 2: Structural**
+  - Symptoms: mixed responsibilities, duplicated flows, leaky modules, unclear ownership.
+  - Root cause: wrong code organization or boundary placement.
+  - Required: ownership matrix and complexity budget.
+
+- **Level 3: Architectural**
+  - Symptoms: harmful public contract, multiple fact authorities, wrong runtime/control-plane split, long-lived false compatibility.
+  - Root cause: wrong abstraction or source-of-truth model.
+  - Required: decision log, compatibility plan, source-of-truth model, verification matrix.
+
+## Batch Split Patterns
+
+- Flow batch: one user/system path from entrypoint to side effect.
+- Boundary batch: one module ownership boundary at a time.
+- Fact batch: one authoritative fact and its read/write paths.
+- Contract batch: one public API/CLI/config/schema behavior.
+- Compatibility batch: delete or sunset one stale path at a time.
+
+Keep each batch reversible unless the user explicitly approved an irreversible cleanup.
+
+## Verification Matrix Template
+
+| Claim | Check | Evidence | Gap |
+| --- | --- | --- | --- |
+| Public behavior preserved |  |  |  |
+| New owner handles valid path |  |  |  |
+| Old bypass path removed or blocked |  |  |  |
+| Fact source is authoritative |  |  |  |
+| Compatibility path kept/deleted as planned |  |  |  |
+| Docs/examples match live behavior |  |  |  |
+
+Verification tactics:
+
+- Golden outputs for stable behavior.
+- Focused integration checks for boundary movement.
+- Scripted assertions for source-of-truth and write-path claims.
+- Smoke checks for public commands or API examples.
+- Static search for deleted aliases, duplicate paths, or forbidden imports.
 
 ## Decision Log Template
 
-- Decision: <why split/merge/remove>
-- Impact: <modules/tests/observability affected>
-- Compatibility: <behavior unchanged?>
-- Rollback: <how to revert>
-- Evidence: <tests or checks run>
+- Decision:
+- Level:
+- Debt categories:
+- First-principles reason:
+- Alternatives rejected:
+- Public behavior impact:
+- Compatibility decision:
+- Rollback or sunset path:
+- Verification evidence:
 
 ## Risk List Template
 
-- Risk: <what could break>
-- Trigger: <conditions>
-- Mitigation: <tests/monitoring>
-- Owner: <who confirms>
+- Risk:
+- Trigger:
+- Impact:
+- Mitigation:
+- Verification:
+- Follow-up owner or condition:
 
 ## Documentation Sync Triggers
 
-- Contract changes: update API docs or schemas.
-- Config changes: update examples and references.
-- Workflow changes: update runbooks or onboarding notes.
+- Public contract changes: update API docs, schemas, examples, or generated references.
+- Config changes: update examples and migration notes.
+- CLI or workflow changes: update user guides and command references.
+- Storage/source-of-truth changes: update architecture or operations docs.
+- Runtime semantics changes: update lifecycle or runbook documentation.
 
 ## Exit Checklist
 
-- Tests/checks pass for the touched surface.
-- External contracts unchanged (or explicitly approved).
-- Observability still reliable.
-- Decisions and risks recorded.
+- Refactor level matched the root cause.
+- Complexity budget improved.
+- Ownership and source-of-truth rules are explicit.
+- Public surface no longer leaks unnecessary internal mechanisms.
+- Obsolete paths were deleted or have a real sunset rule.
+- Verification proves the changed invariant, not just unrelated behavior.
+- Docs and examples match live code paths.
+- Residual debt is named with a concrete follow-up trigger.
