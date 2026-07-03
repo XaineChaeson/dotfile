@@ -25,12 +25,17 @@ restore_backup() {
   local backup
   backup="$(ls -t "$dest".bak.* 2>/dev/null | head -n 1 || true)"
   if [[ -n "$backup" ]]; then
-    mv "$backup" "$dest"
+    if [[ -L "$backup" ]]; then
+      cp -p "$(readlink -f "$backup")" "$dest"
+      rm "$backup"
+    else
+      mv "$backup" "$dest"
+    fi
     printf 'RESTORE %s -> %s\n' "$backup" "$dest"
   fi
 }
 
-unlink_file() {
+remove_installed_file() {
   local src="$1"
   local dest="$2"
 
@@ -43,6 +48,13 @@ unlink_file() {
       fi
       return
     fi
+  fi
+
+  if [[ -f "$dest" ]] && cmp -s "$src" "$dest"; then
+    rm "$dest"
+    printf 'REMOVE %s\n' "$dest"
+    restore_backup "$dest"
+    return
   fi
 
   printf 'SKIP %s\n' "$dest"
@@ -68,9 +80,9 @@ remove_source_line() {
 printf 'Platform: %s (%s)\n' "$platform" "$os"
 printf 'Repo: %s\n' "$script_dir"
 
-unlink_file "$script_dir/.tmux.conf" "$HOME/.tmux.conf"
-unlink_file "$script_dir/.vimrc" "$HOME/.vimrc"
-unlink_file "$script_dir/.bash_aliases" "$HOME/.bash_aliases"
+remove_installed_file "$script_dir/.tmux.conf" "$HOME/.tmux.conf"
+remove_installed_file "$script_dir/.vimrc" "$HOME/.vimrc"
+remove_installed_file "$script_dir/.bash_aliases" "$HOME/.bash_aliases"
 
 remove_source_line "$HOME/.bashrc"
 remove_source_line "$HOME/.bash_profile"

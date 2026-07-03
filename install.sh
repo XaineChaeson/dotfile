@@ -14,17 +14,7 @@ timestamp() {
   date +"%Y%m%d%H%M%S"
 }
 
-resolve_link() {
-  local link
-  link="$(readlink "$1")"
-  if [[ "$link" = /* ]]; then
-    printf '%s\n' "$link"
-  else
-    printf '%s\n' "$(cd "$(dirname "$1")" && pwd)/$link"
-  fi
-}
-
-link_file() {
+copy_file() {
   local src="$1"
   local dest="$2"
   local dest_dir
@@ -32,27 +22,31 @@ link_file() {
   dest_dir="$(dirname "$dest")"
   mkdir -p "$dest_dir"
 
-  if [[ -L "$dest" ]]; then
-    if [[ "$(resolve_link "$dest")" = "$src" ]]; then
-      printf 'OK  %s -> %s\n' "$dest" "$src"
+  if [[ -e "$dest" || -L "$dest" ]]; then
+    if [[ ! -L "$dest" ]] && cmp -s "$src" "$dest"; then
+      printf 'OK   %s\n' "$dest"
       return
     fi
-  elif [[ -e "$dest" ]]; then
     local backup="$dest.bak.$(timestamp)"
-    mv "$dest" "$backup"
+    if [[ -L "$dest" ]]; then
+      cp -p "$(readlink -f "$dest")" "$backup"
+      rm "$dest"
+    else
+      mv "$dest" "$backup"
+    fi
     printf 'BAK %s -> %s\n' "$dest" "$backup"
   fi
 
-  ln -s "$src" "$dest"
-  printf 'LINK %s -> %s\n' "$dest" "$src"
+  cp -p "$src" "$dest"
+  printf 'COPY %s -> %s\n' "$src" "$dest"
 }
 
 printf 'Platform: %s (%s)\n' "$platform" "$os"
 printf 'Repo: %s\n' "$script_dir"
 
-link_file "$script_dir/.tmux.conf" "$HOME/.tmux.conf"
-link_file "$script_dir/.vimrc" "$HOME/.vimrc"
-link_file "$script_dir/.bash_aliases" "$HOME/.bash_aliases"
+copy_file "$script_dir/.tmux.conf" "$HOME/.tmux.conf"
+copy_file "$script_dir/.vimrc" "$HOME/.vimrc"
+copy_file "$script_dir/.bash_aliases" "$HOME/.bash_aliases"
 
 ensure_source() {
   local rc="$1"

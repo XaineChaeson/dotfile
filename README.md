@@ -58,8 +58,8 @@ via `@mode` and `@mode_hint`.
 
 ## Install
 
-Run the installer to symlink the configs and wire `.bash_aliases` into your
-shell startup files:
+Run the installer to copy the configs into `$HOME` and wire `.bash_aliases`
+into your shell startup files:
 
 ```bash
 ./install.sh
@@ -67,14 +67,16 @@ shell startup files:
 
 What it does:
 
-- Links `.tmux.conf`, `.vimrc`, `.bash_aliases` into `$HOME`
+- Copies `.tmux.conf`, `.vimrc`, `.bash_aliases` into `$HOME`
 - Backs up existing files as `*.bak.<timestamp>`
 - Ensures `~/.bashrc` (or `~/.bash_profile`) and `~/.zshrc` source
   `.bash_aliases`
+- Does not symlink tracked repo files, so editing deployed files under `$HOME`
+  will not modify this repository
 
 ## Uninstall
 
-Remove the symlinks and restore the most recent backups (if present):
+Remove managed copies and restore the most recent backups (if present):
 
 ```bash
 ./uninstall.sh
@@ -82,7 +84,9 @@ Remove the symlinks and restore the most recent backups (if present):
 
 What it does:
 
-- Unlinks files only if they point to this repo
+- Removes old symlinks only if they point to this repo
+- Removes copied files only if they still match the repo version; modified local
+  files are skipped
 - Restores latest `*.bak.<timestamp>` when available
 - Removes the `.bash_aliases` source line from `~/.bashrc`, `~/.bash_profile`,
   and `~/.zshrc`
