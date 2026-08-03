@@ -1,2 +1,6 @@
 .bash_aliases.local
 .tmux.local.conf
+.DS_Store
+__pycache__/
+*.py[cod]
+codex/*.local.toml

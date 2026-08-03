@@ -1,0 +1,15 @@
+# Portable personal defaults only.
+# Keep project trust, credentials, marketplace/cache state, plugin installation,
+# machine-specific MCP commands, UI state, and experimental feature choices local.
+
+model_reasoning_effort = "xhigh"
+plan_mode_reasoning_effort = "xhigh"
+personality = "pragmatic"
+
+[features]
+multi_agent = true
+shell_snapshot = true
+
+[agents]
+max_threads = 6
+max_depth = 1

@@ -71,7 +71,7 @@ remove_source_line() {
   if grep -Fq "$line" "$rc"; then
     local tmp
     tmp="$(mktemp)"
-    grep -Fv "$line" "$rc" >"$tmp"
+    grep -Fv "$line" "$rc" >"$tmp" || true
     mv "$tmp" "$rc"
     printf 'CLEAN %s\n' "$rc"
   fi
@@ -83,6 +83,9 @@ printf 'Repo: %s\n' "$script_dir"
 remove_installed_file "$script_dir/.tmux.conf" "$HOME/.tmux.conf"
 remove_installed_file "$script_dir/.vimrc" "$HOME/.vimrc"
 remove_installed_file "$script_dir/.bash_aliases" "$HOME/.bash_aliases"
+remove_installed_file "$script_dir/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
+remove_installed_file "$script_dir/codex/config.portable.toml" "$HOME/.codex/config.toml"
+remove_installed_file "$script_dir/codex/profiles/full-access.config.toml" "$HOME/.codex/full-access.config.toml"
 
 remove_source_line "$HOME/.bashrc"
 remove_source_line "$HOME/.bash_profile"

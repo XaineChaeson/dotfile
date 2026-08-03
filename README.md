@@ -1,11 +1,11 @@
 # Dotfile
 
-This repo contains my personal dotfile setup plus a couple of helper components.
+This repo contains my personal machine configuration and bootstrap helpers.
 
 ## What's inside
 
 - **dotfile**: Shell/editor/tooling configs that I use day-to-day.
-- **skills**: Custom Codex skills I use for my own workflows.
+- **codex**: Portable personal Codex defaults and global instructions.
 - **chrome-devtool-remote**: A solution for running remote Chrome DevTools on Linux.
 
 ## Tmux modes
@@ -68,6 +68,9 @@ into your shell startup files:
 What it does:
 
 - Copies `.tmux.conf`, `.vimrc`, `.bash_aliases` into `$HOME`
+- Copies the global Codex `AGENTS.md` into `~/.codex`
+- Installs the portable Codex config only when `~/.codex/config.toml` does not exist
+- Installs the explicit `full-access` Codex profile without making it the default
 - Backs up existing files as `*.bak.<timestamp>`
 - Ensures `~/.bashrc` (or `~/.bash_profile`) and `~/.zshrc` source
   `.bash_aliases`
@@ -91,30 +94,15 @@ What it does:
 - Removes the `.bash_aliases` source line from `~/.bashrc`, `~/.bash_profile`,
   and `~/.zshrc`
 
-## Skill Sync
+## Codex Configuration Boundary
 
-Sync Codex skills between this repo and your local Codex skills directory:
+`codex/config.portable.toml` contains only defaults intended to move between machines. The installer does not overwrite an existing live config because Codex also stores machine-specific project trust, MCP paths, plugin state, and UI state there.
 
-```bash
-./sync-skills.sh to-codex
-./sync-skills.sh from-codex --skill project-docs-maintenance
-./sync-skills.sh to-codex --dry-run
-./sync-skills.sh from-codex --delete
-```
+The current machine's elevated permission choice is installed separately as `~/.codex/full-access.config.toml`. Select it explicitly with `codex --profile full-access`; it is not the automatic new-machine default.
 
-Options:
+Credentials, `auth.json`, sessions, caches, generated marketplace state, trusted-project paths, and machine-specific MCP commands are not owned by this repository.
 
-- `to-codex` sync from this repo to local Codex skills
-- `from-codex` sync from local Codex skills to this repo
-- `--skill NAME` sync only specific skills (repeatable); if omitted, syncs all skills from the source
-- `--dry-run` preview what would change without writing
-- `--delete` remove files in the destination that do not exist in source
-
-Environment overrides:
-
-- `REPO_SKILLS_DIR` (default: `<repo>/skills`)
-- `CODEX_HOME` (default: `~/.codex`)
-- `CODEX_SKILLS_DIR` (default: `$CODEX_HOME/skills`)
+Custom and third-party skills are managed by the independent `codex-skills` repository. On a new machine, install Codex, clone that repository, and run its `./install.sh`; this dotfile repository does not vendor or synchronize skills.
 
 ## Notes
 

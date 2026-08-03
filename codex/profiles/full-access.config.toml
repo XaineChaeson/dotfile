@@ -1,0 +1,4 @@
+# Explicit host permission profile matching the current machine's chosen policy.
+approval_policy = "on-request"
+approvals_reviewer = "user"
+sandbox_mode = "danger-full-access"
