@@ -102,7 +102,7 @@ The current machine's elevated permission choice is installed separately as `~/.
 
 Credentials, `auth.json`, sessions, caches, generated marketplace state, trusted-project paths, and machine-specific MCP commands are not owned by this repository.
 
-Custom and third-party skills are managed by the independent `codex-skills` repository. On a new machine, install Codex, clone that repository, and run its `./install.sh`; this dotfile repository does not vendor or synchronize skills.
+This repository does not install or synchronize skills. Codex system skills and connected-plugin skills remain owned by Codex and their plugins. The retired personal skill manager and its installed copies were removed from this machine; see the [repository retirement record](docs/repository-retirement.md).
 
 ## Notes
 
