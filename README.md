@@ -5,7 +5,6 @@ This repo contains my personal dotfile setup plus a couple of helper components.
 ## What's inside
 
 - **dotfile**: Shell/editor/tooling configs that I use day-to-day.
-- **skills**: Custom Codex skills I use for my own workflows.
 - **chrome-devtool-remote**: A solution for running remote Chrome DevTools on Linux.
 
 ## Tmux modes
@@ -91,30 +90,11 @@ What it does:
 - Removes the `.bash_aliases` source line from `~/.bashrc`, `~/.bash_profile`,
   and `~/.zshrc`
 
-## Skill Sync
+## Skills
 
-Sync Codex skills between this repo and your local Codex skills directory:
-
-```bash
-./sync-skills.sh to-codex
-./sync-skills.sh from-codex --skill project-docs-maintenance
-./sync-skills.sh to-codex --dry-run
-./sync-skills.sh from-codex --delete
-```
-
-Options:
-
-- `to-codex` sync from this repo to local Codex skills
-- `from-codex` sync from local Codex skills to this repo
-- `--skill NAME` sync only specific skills (repeatable); if omitted, syncs all skills from the source
-- `--dry-run` preview what would change without writing
-- `--delete` remove files in the destination that do not exist in source
-
-Environment overrides:
-
-- `REPO_SKILLS_DIR` (default: `<repo>/skills`)
-- `CODEX_HOME` (default: `~/.codex`)
-- `CODEX_SKILLS_DIR` (default: `$CODEX_HOME/skills`)
+This repository does not install or synchronize skills. Codex system skills and
+connected-plugin skills remain managed by their owners. The personal skill
+manager was retired; see the [repository retirement record](docs/repository-retirement.md).
 
 ## Notes
 
