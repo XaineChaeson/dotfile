@@ -1,13 +1,12 @@
 # Dotfile
 
-This repo contains my personal machine configuration and bootstrap helpers.
+This repo contains only my personal dotfiles (machine configuration) and their install helpers.
 
 ## What's inside
 
 - **dotfile**: Shell/editor/tooling configs that I use day-to-day.
 - **codex**: Portable personal Codex defaults and global instructions.
 - **claude**: Global Claude Code instructions (`~/.claude/CLAUDE.md`): language preference and engineering taste.
-- **chrome-devtool-remote**: A solution for running remote Chrome DevTools on Linux.
 
 ## Tmux modes
 
@@ -102,8 +101,6 @@ What it does:
 The current machine's elevated permission choice is installed separately as `~/.codex/full-access.config.toml`. Select it explicitly with `codex --profile full-access`; it is not the automatic new-machine default.
 
 Credentials, `auth.json`, sessions, caches, generated marketplace state, trusted-project paths, and machine-specific MCP commands are not owned by this repository.
-
-This repository does not install or synchronize skills. Codex system skills and connected-plugin skills remain owned by Codex and their plugins. The retired personal skill manager and its installed copies were removed from this machine; see the [repository retirement record](docs/repository-retirement.md).
 
 ## Notes
 
