@@ -84,6 +84,7 @@ remove_installed_file "$script_dir/.tmux.conf" "$HOME/.tmux.conf"
 remove_installed_file "$script_dir/.vimrc" "$HOME/.vimrc"
 remove_installed_file "$script_dir/.bash_aliases" "$HOME/.bash_aliases"
 remove_installed_file "$script_dir/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
+remove_installed_file "$script_dir/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 remove_installed_file "$script_dir/codex/config.portable.toml" "$HOME/.codex/config.toml"
 remove_installed_file "$script_dir/codex/profiles/full-access.config.toml" "$HOME/.codex/full-access.config.toml"
 

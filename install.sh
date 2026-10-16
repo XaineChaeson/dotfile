@@ -62,6 +62,7 @@ copy_file "$script_dir/.tmux.conf" "$HOME/.tmux.conf"
 copy_file "$script_dir/.vimrc" "$HOME/.vimrc"
 copy_file "$script_dir/.bash_aliases" "$HOME/.bash_aliases"
 copy_file "$script_dir/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
+copy_file "$script_dir/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 copy_file_if_missing "$script_dir/codex/config.portable.toml" "$HOME/.codex/config.toml"
 copy_file "$script_dir/codex/profiles/full-access.config.toml" "$HOME/.codex/full-access.config.toml"
 

@@ -6,6 +6,7 @@ This repo contains my personal machine configuration and bootstrap helpers.
 
 - **dotfile**: Shell/editor/tooling configs that I use day-to-day.
 - **codex**: Portable personal Codex defaults and global instructions.
+- **claude**: Global Claude Code instructions (`~/.claude/CLAUDE.md`): language preference and engineering taste.
 - **chrome-devtool-remote**: A solution for running remote Chrome DevTools on Linux.
 
 ## Tmux modes
