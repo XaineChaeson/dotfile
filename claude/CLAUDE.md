@@ -22,3 +22,9 @@ established principles: use their standard meaning, not any one project's mechan
    continuing would silently produce wrong results. Equivalent requests give identical results.
 4. **Information hiding (Parnas), Goodhart's law.** Internals stay free to change: tests, evaluation and
    exposed configuration bind only to a minimal public interface. Optimize the system, not the metric.
+
+## Working hygiene
+
+- When a task or iteration ends, remove the temporary outputs that you or agents you delegated to
+  created: anything that is neither a deliverable nor needed to resume or reproduce the work. Ask before
+  deleting anything you did not create.
