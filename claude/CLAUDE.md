@@ -7,28 +7,18 @@
 
 ## Engineering taste
 
-These principles come from large architecture cuts I approved. Apply them to every design, review and
-architecture audit, in any project. When an audit or refactor is delegated, put them into the brief.
+Apply to every design, review and audit in any project, and include in delegated briefs. These are
+established principles: use their standard meaning, not any one project's mechanisms.
 
-1. **Own only what only you can know.** A component keeps a responsibility only if no other party owns that
-   fact. Push everything else to its real owner: the database enforces SQL semantics, limits and
-   permissions; the data source owns its schema; repository admins own branches and tags; the consuming
-   module owns business semantics; the data owner owns deduplication and freshness.
-2. **Delete proof machinery instead of hardening it.** When guards, validations or consistency proofs keep
-   needing fix rounds, the responsibility sits in the wrong layer. Remove the layer; do not add another patch.
-3. **One source of truth per fact; derive the rest.** No hand-maintained declaration that must stay in sync
-   with something else. Prefer content addresses and observation (for example, a Git tree id as the
-   version, a source probe as the schema) over parallel version numbers and copies.
-4. **Never block the user's work.** Degrade, warn, and offer explicit tools to inspect and repair (for
-   example, duplicates()/dedupe()). Fail only when continuing would silently produce wrong results. No hidden
-   behaviour: equivalent requests must give identical results (select * equals the full explicit list).
-5. **One obvious way; unify instead of forking.** One data model with different shapes, not parallel types.
-   Contracts are held by their consumer and adapted through configuration, not code. Create a shared
-   abstraction only when a second real consumer exists.
-6. **Generic paths over special cases.** Performance should come from removing round trips, copies and
-   ceremony, not from benchmark-specific fast paths or case branches.
-7. **Cut in one go.** No compatibility shims, migration residue or dual paths unless I ask for them. Judge a
-   refactor at the whole-architecture level, and bind evaluation and tests to public behaviour, not to internals.
-8. **Configurable without sprawl.** Every policy value is defined once in a central registry (no scattered
-   literals), but exposure is minimal: each public knob has exactly one owning file plus an environment
-   override; internal constants stay internal; restrictions that belong to an external service are removed.
+1. **Information Expert / end-to-end argument.** A responsibility lives with the party that has the
+   knowledge to fulfil it completely. Other layers query or derive it; they do not copy, re-enforce or
+   prove it. Guards that keep needing fixes mean the responsibility is in the wrong place: remove the
+   layer, don't harden it.
+2. **Occam's razor (KISS, YAGNI).** Add no entity the problem does not require: no copy (DRY, one
+   authoritative representation per piece of knowledge), no second way (one obvious way), no special-case
+   path, no abstraction before real repetition, no compatibility layer without a real consumer. When
+   removing, remove completely.
+3. **Rule of Repair, Least Surprise.** Degrade and report where possible; fail loudly and early only when
+   continuing would silently produce wrong results. Equivalent requests give identical results.
+4. **Information hiding (Parnas), Goodhart's law.** Internals stay free to change: tests, evaluation and
+   exposed configuration bind only to a minimal public interface. Optimize the system, not the metric.
