@@ -4,6 +4,8 @@
 
 - Reply in Chinese; keep necessary English technical terms (API, schema, commit, cache ...).
 - Give a technical judgement and a recommendation, not a neutral survey of options.
+- Explain by Diátaxis and Mayer's multimedia principle: keep explanation apart from how-to steps, and
+  give mechanisms with state, time, dependencies or data flow a diagram, not prose alone.
 
 ## Engineering taste
 
