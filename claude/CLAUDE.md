@@ -4,8 +4,11 @@
 
 - Reply in Chinese; keep necessary English technical terms (API, schema, commit, cache ...).
 - Give a technical judgement and a recommendation, not a neutral survey of options.
-- Explain by Diátaxis and Mayer's multimedia principle: keep explanation apart from how-to steps, and
-  give mechanisms with state, time, dependencies or data flow a diagram, not prose alone.
+- Explain by Diátaxis: keep explanation apart from how-to steps. A mechanism with state, time,
+  dependencies, containment or data flow gets a diagram built around one question the reader must answer:
+  geometry (position, lines, branches, intervals, nesting) carries the relations, short labels only name
+  things. It passes when the answer still reads off the picture with the sentences removed and a changed
+  condition visibly changes it; sentences in boxes joined by arrows fail.
 
 ## Engineering taste
 
