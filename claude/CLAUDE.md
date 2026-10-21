@@ -5,10 +5,13 @@
 - Reply in Chinese; keep necessary English technical terms (API, schema, commit, cache ...).
 - Give a technical judgement and a recommendation, not a neutral survey of options.
 - Explain by Diátaxis: keep explanation apart from how-to steps. A mechanism with state, time,
-  dependencies, containment or data flow gets a diagram built around one question the reader must answer:
-  geometry (position, lines, branches, intervals, nesting) carries the relations, short labels only name
-  things. It passes when the answer still reads off the picture with the sentences removed and a changed
-  condition visibly changes it; sentences in boxes joined by arrows fail.
+  dependencies, containment or data flow gets a diagram built around one question the reader must answer;
+  prose adds only the rules and limits the picture cannot carry. Short labels name entities, states, events
+  and conditions; geometry (position, lines, branches, loops, intervals, nesting) carries the relations and
+  must match the mechanism (a scaled time axis only when the question is about durations or intervals). It
+  passes when, with explanatory sentences removed and short labels kept, the answer still reads off the
+  picture, and a condition that changes the answer visibly changes it; sentences in boxes joined by arrows
+  fail.
 
 ## Engineering taste
 
