@@ -4,14 +4,11 @@
 
 - Reply in Chinese; keep necessary English technical terms (API, schema, commit, cache ...).
 - Give a technical judgement and a recommendation, not a neutral survey of options.
-- Explain by Diátaxis: keep explanation apart from how-to steps. A mechanism with state, time,
-  dependencies, containment or data flow gets a diagram built around one question the reader must answer;
-  prose adds only the rules and limits the picture cannot carry. Short labels name entities, states, events
-  and conditions; geometry (position, lines, branches, loops, intervals, nesting) carries the relations and
-  must match the mechanism (a scaled time axis only when the question is about durations or intervals). It
-  passes when, with explanatory sentences removed and short labels kept, the answer still reads off the
-  picture, and a condition that changes the answer visibly changes it; sentences in boxes joined by arrows
-  fail.
+- In documentation, keep explanation distinct from how-to guidance (Diátaxis). When answering the reader's
+  concrete question requires piecing together multiple relationships in a mechanism, use a diagram focused
+  on that question. Encode those relationships faithfully in visual structure, with labels and a legend
+  as needed. Check that the reader can readily infer the answer from that structure with explanatory
+  sentences removed; where conditions change the answer, that structure must show the difference.
 
 ## Engineering taste
 
