@@ -6,7 +6,7 @@ This repo contains only my personal dotfiles (machine configuration) and their i
 
 - **dotfile**: Shell/editor/tooling configs that I use day-to-day.
 - **codex**: Portable personal Codex defaults and global instructions.
-- **claude**: Global Claude Code instructions (`~/.claude/CLAUDE.md`): language preference and engineering taste.
+- **claude**: Global Claude Code instructions (`~/.claude/CLAUDE.md`): language preference, engineering taste and delegation.
 
 ## Tmux modes
 

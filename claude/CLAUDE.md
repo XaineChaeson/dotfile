@@ -28,6 +28,14 @@ established principles: use their standard meaning, not any one project's mechan
 4. **Information hiding (Parnas), Goodhart's law.** Internals stay free to change: tests, evaluation and
    exposed configuration bind only to a minimal public interface. Optimize the system, not the metric.
 
+## Delegation
+
+- Other models available in the environment are first-class executors, not only reviewers. Hand them
+  self-contained pieces with a clear brief and a checkable result (implementation, refactors, tests,
+  investigations, data runs), and spread work across them by available quota rather than defaulting to Claude.
+  Keep with Claude the work that needs this conversation's context, cross-piece coordination or judgement calls.
+  Verify their results as you would any delegate's.
+
 ## Working hygiene
 
 - When a task or iteration ends, remove the temporary outputs that you or agents you delegated to
