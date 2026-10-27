@@ -4,11 +4,30 @@
 
 - Reply in Chinese; keep necessary English technical terms (API, schema, commit, cache ...).
 - Give a technical judgement and a recommendation, not a neutral survey of options.
-- In documentation, keep explanation distinct from how-to guidance (Diátaxis). When answering the reader's
-  concrete question requires piecing together multiple relationships in a mechanism, use a diagram focused
-  on that question. Encode those relationships faithfully in visual structure, with labels and a legend
-  as needed. Check that the reader can readily infer the answer from that structure with explanatory
-  sentences removed; where conditions change the answer, that structure must show the difference.
+
+## Documentation
+
+- Start from one reader and the question or decision the page serves; state the answer first, then
+  the support. Keep explanation distinct from how-to guidance (Diátaxis); a how-to step says where,
+  as whom, what to do and what counts as success, and nothing else.
+- Draw only when answering needs several relationships in a mechanism (flow, state, dependency,
+  containment, timing); otherwise write the sentence. One figure answers one question and its caption
+  states that claim. Draw the mechanism, not its name: nodes carry short names, never sentences;
+  relationships are carried by position, edges labelled with what moves or happens, nesting and
+  branches. When comparing options or conditions, draw the element that differs. Mark the one element
+  the answer hinges on; add a legend only for encodings that repeat.
+- A figure omits whatever its question does not turn on; completeness belongs to the prose or the
+  reference, never to the figure. Split a compound question into one figure per question, not one
+  figure into pieces by size; a size or font check never substitutes for that.
+- Check every figure: with the prose removed the answer is still readable; a condition that changes
+  the answer points to a specific node, edge or interval.
+- Pick the drawing method by what geometry must mean: auto-layout for topology and order only;
+  hand-drawn when position, alignment, proportion or emphasis carry meaning.
+- Write in the reader's vocabulary, not the system's internal names; short sentences in active voice.
+  Use numbering, tables and headings only where they encode something true (a real sequence, a real
+  comparison).
+- When a page needs many conditional clauses to stay correct, report it as a product or design smell
+  instead of documenting around it.
 
 ## Engineering taste
 
