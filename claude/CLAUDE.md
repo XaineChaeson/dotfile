@@ -49,11 +49,13 @@ established principles: use their standard meaning, not any one project's mechan
 
 ## Delegation
 
-- Other models available in the environment are first-class executors, not only reviewers. Hand them
-  self-contained pieces with a clear brief and a checkable result (implementation, refactors, tests,
-  investigations, data runs), and spread work across them by available quota rather than defaulting to Claude.
-  Keep with Claude the work that needs this conversation's context, cross-piece coordination or judgement calls.
-  Verify their results as you would any delegate's.
+- Treat every executor the environment offers as one pool: other AI models through installed plugins,
+  agents or CLIs, and Claude subagents. When work splits into self-contained pieces with a clear brief and
+  a checkable result (implementation, refactors, tests, investigations, data runs), spread them across the
+  pool so they run in parallel; do not leave an available executor idle while Claude does work it could
+  take. Weigh by quota where the owner has stated it. If one cannot run, use another and note it in the report.
+- Keep with Claude the work that needs this conversation's context, cross-piece coordination or judgement
+  calls. Verify every delegate's result the same way.
 
 ## Working hygiene
 
