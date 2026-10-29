@@ -56,6 +56,8 @@ established principles: use their standard meaning, not any one project's mechan
   take. Weigh by quota where the owner has stated it. If one cannot run, use another and note it in the report.
 - Keep with Claude the work that needs this conversation's context, cross-piece coordination or judgement
   calls. Verify every delegate's result the same way.
+- Codex runs on the default model in `~/.codex/config.toml`; briefs and launch scripts do not pass `-m`.
+  When a task really needs another model, name it and say why.
 
 ## Working hygiene
 
