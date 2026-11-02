@@ -1,0 +1,4 @@
+# Strong capability tier (owner, 2026-11-02). Launch with `--profile strong`.
+# This file is the only place that sets this tier's model and reasoning effort; list models with `codex debug models`.
+model = "gpt-6.1-sol"
+model_reasoning_effort = "high"
