@@ -1,7 +1,8 @@
 # Strong capability tier (owner, 2026-11-02): dsh --profile headless --patch ~/.dsh/tiers/strong.patch.yml
+# Flash first (owner, 2026-11-02): pro only as an escalation after repeated failed reviews.
 # The only place that sets this tier's model and effort; list models with GET https://api.deepseek.com/models.
 - id: agent-default-model
   config:
     provider: deepseek-official
-    model: deepseek-v4-pro
-    reasoningEffort: high
+    model: deepseek-flash
+    reasoningEffort: max
