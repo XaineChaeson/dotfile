@@ -16,7 +16,7 @@ Linux/macOS.
 | `~/.claude/CLAUDE.md` | Imports `~/.agents/AGENTS.md` and adds the Claude-only Delegation section |
 | `~/.codex/{strong,cheap}.config.toml` | Codex tiers: `codex --profile <tier>` |
 | `~/.claude/tiers/{strong,cheap}.json` | Claude tiers: `claude -p --settings ~/.claude/tiers/<tier>.json` |
-| `~/.dsh/tiers/{strong,cheap}.patch.yml` | DeepSeek Harness tiers: `dsh --profile headless --patch ~/.dsh/tiers/<tier>.patch.yml` |
+| `~/.dsh/tiers/{strong,cheap,escalation}.patch.yml` | DeepSeek Harness tiers: `dsh --profile headless --patch ~/.dsh/tiers/<tier>.patch.yml`; `escalation` only after strong keeps failing review |
 | `~/.codex/full-access.config.toml` | Explicit Codex permission profile: `codex --profile full-access` |
 | `~/.tmux.conf`, `~/.vimrc`, `~/.bash_aliases` | Shell and editor configs (Linux/macOS) |
 

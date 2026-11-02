@@ -20,9 +20,8 @@ The instructions shared by every agent live in `~/.agents/AGENTS.md`:
 - A dispatch picks an executor and a tier. Every executor (Codex, `claude -p`, DeepSeek Harness `dsh`) offers both
   tiers as a profile named `strong` or `cheap` in its own config on the machine where it runs; the launch commands
   are in the cluster-controller skill. Pick the executor by quota and load: Codex, then `claude -p`, then `dsh`;
-  `dsh` has no quota limit, so bulk cheap-tier work can go there directly. On `dsh`, start every piece on the cheap
-  tier, strong-tier work included (owner, 2026-11-02: as capable there, cheaper and faster); use its strong tier only
-  for a piece whose cheap-tier result failed review. Strong-tier review of every result
+  `dsh` has no quota limit, so bulk cheap-tier work can go there directly. `dsh` has a third tier, `escalation`, only for a
+  piece whose `dsh` strong-tier result keeps failing review. Strong-tier review of every result
   stays the same whichever executor did the work.
 - Rules, skills, briefs and launch scripts name executors and tiers, never models: no `-m`/`--model` flags and no
   model ids. Each tier profile is the one place that sets its model and reasoning effort. Effort belongs to the tier,
