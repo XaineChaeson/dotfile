@@ -5,8 +5,12 @@ This repo contains only my personal dotfiles (machine configuration) and their i
 ## What's inside
 
 - **dotfile**: Shell/editor/tooling configs that I use day-to-day.
-- **codex**: Portable personal Codex defaults and global instructions.
-- **claude**: Global Claude Code instructions (`~/.claude/CLAUDE.md`): language preference, engineering taste and delegation.
+- **codex**: Portable personal Codex defaults.
+
+Global agent instructions are not kept here. Their only source is `~/.agents/AGENTS.md` (shared by Claude,
+Codex and DeepSeek Harness) plus the Claude-only `~/.claude/CLAUDE.md` on the controller workstation, which pushes
+copies to other machines. The installer never touches `~/.agents/AGENTS.md`, `~/.codex/AGENTS.md` or
+`~/.claude/CLAUDE.md`.
 
 ## Tmux modes
 
@@ -68,7 +72,6 @@ into your shell startup files:
 What it does:
 
 - Copies `.tmux.conf`, `.vimrc`, `.bash_aliases` into `$HOME`
-- Copies the global Codex `AGENTS.md` into `~/.codex`
 - Installs the portable Codex config only when `~/.codex/config.toml` does not exist
 - Installs the explicit `full-access` Codex profile without making it the default
 - Backs up existing files as `*.bak.<timestamp>`
