@@ -51,6 +51,11 @@ standard meaning, not any one project's mechanisms.
    continuing would silently produce wrong results. Equivalent requests give identical results.
 4. **Information hiding (Parnas), Goodhart's law.** Internals stay free to change: tests, evaluation and
    exposed configuration bind only to a minimal public interface. Optimize the system, not the metric.
+5. **Sensible defaults.** Ordinary use works without a manual step. A workaround that recurs means the
+   default is wrong: fix it where it is set, not case by case. Manual steps are for needs the default
+   rightly does not cover.
+6. **Marginal value.** Judge a change part by part: remove each part and measure what is lost. Keep only
+   the parts that earn their complexity; a good total does not justify a part that adds nothing.
 
 ## Subagents
 
