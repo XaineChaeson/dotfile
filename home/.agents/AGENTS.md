@@ -56,6 +56,9 @@ standard meaning, not any one project's mechanisms.
    rightly does not cover.
 6. **Marginal value.** Judge a change part by part: remove each part and measure what is lost. Keep only
    the parts that earn their complexity; a good total does not justify a part that adds nothing.
+7. **Guarantees are liabilities.** Start from what comparable systems promise. Each extra guarantee names
+   who relies on it and what it costs; without both, drop it. Do not let a verification method harden into
+   a promise, and let review remove requirements as readily as it adds them.
 
 ## Subagents
 
