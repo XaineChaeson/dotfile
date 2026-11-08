@@ -42,7 +42,9 @@ standard meaning, not any one project's mechanisms.
 1. **Information Expert / end-to-end argument.** A responsibility lives with the party that has the
    knowledge to fulfil it completely. Other layers query or derive it; they do not copy, re-enforce or
    prove it. Guards that keep needing fixes mean the responsibility is in the wrong place: remove the
-   layer, don't harden it.
+   layer, don't harden it. Normalize data once where it enters (parse, don't validate); everything
+   downstream relies on the normal form and carries no special case for what the entry removed. When a
+   special case appears inside, first ask which entry let it through, and fix it there.
 2. **Occam's razor (KISS, YAGNI).** Add no entity the problem does not require: no copy (DRY, one
    authoritative representation per piece of knowledge), no second way (one obvious way), no special-case
    path, no abstraction before real repetition, no compatibility layer without a real consumer. When
