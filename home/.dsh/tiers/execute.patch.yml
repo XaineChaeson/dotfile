@@ -1,8 +1,9 @@
 # Execute tier (owner, 2026-11-08): dsh --profile headless --patch ~/.dsh/tiers/execute.patch.yml
-# Implementation and verification with a checkable result.
+# Implementation and verification with a checkable result. DeepSeek takes only high or max here, so both tiers
+# run at high: the role, not the effort, tells them apart.
 # The only place that sets this tier's model and effort; list models with GET https://api.deepseek.com/models.
 - id: agent-default-model
   config:
     provider: deepseek-official
     model: deepseek-flash
-    reasoningEffort: medium
+    reasoningEffort: high
