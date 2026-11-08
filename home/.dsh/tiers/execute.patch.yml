@@ -1,7 +1,8 @@
-# Cheap capability tier (owner, 2026-11-02): dsh --profile headless --patch ~/.dsh/tiers/cheap.patch.yml
+# Execute tier (owner, 2026-11-08): dsh --profile headless --patch ~/.dsh/tiers/execute.patch.yml
+# Implementation and verification with a checkable result.
 # The only place that sets this tier's model and effort; list models with GET https://api.deepseek.com/models.
 - id: agent-default-model
   config:
     provider: deepseek-official
     model: deepseek-flash
-    reasoningEffort: high
+    reasoningEffort: medium

@@ -1,4 +1,4 @@
-# Cheap capability tier (owner, 2026-11-02). Launch with `--profile cheap`.
+# Execute tier (owner, 2026-11-08): implementation and verification with a checkable result. Launch with `--profile execute`.
 # This file is the only place that sets this tier's model and reasoning effort; list models with `codex debug models`.
 model = "gpt-6.1-terra"
 model_reasoning_effort = "medium"

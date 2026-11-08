@@ -1,8 +1,0 @@
-# Escalation tier (owner, 2026-11-02): dsh --profile headless --patch ~/.dsh/tiers/escalation.patch.yml
-# Only for a piece whose dsh strong-tier result keeps failing review; dsh work starts on cheap or strong.
-# The only place that sets this tier's model and effort; list models with GET https://api.deepseek.com/models.
-- id: agent-default-model
-  config:
-    provider: deepseek-official
-    model: deepseek-v4-pro
-    reasoningEffort: max
