@@ -45,6 +45,8 @@ standard meaning, not any one project's mechanisms.
    layer, don't harden it. Normalize data once where it enters (parse, don't validate); everything
    downstream relies on the normal form and carries no special case for what the entry removed. When a
    special case appears inside, first ask which entry let it through, and fix it there.
+   Recurring symptoms (rework, merge conflicts, guards needing fixes) point upstream: fix the brief, the
+   decomposition or the owner, not the executor.
 2. **Occam's razor (KISS, YAGNI).** Add no entity the problem does not require: no copy (DRY, one
    authoritative representation per piece of knowledge), no second way (one obvious way), no special-case
    path, no abstraction before real repetition, no compatibility layer without a real consumer. When
@@ -53,6 +55,8 @@ standard meaning, not any one project's mechanisms.
    continuing would silently produce wrong results. Equivalent requests give identical results.
 4. **Information hiding (Parnas), Goodhart's law.** Internals stay free to change: tests, evaluation and
    exposed configuration bind only to a minimal public interface. Optimize the system, not the metric.
+   Split work along the same boundaries: each piece is built and merged independently; two pieces editing
+   one file is a decomposition defect.
 5. **Sensible defaults.** Ordinary use works without a manual step. A workaround that recurs means the
    default is wrong: fix it where it is set, not case by case. Manual steps are for needs the default
    rightly does not cover.
@@ -61,6 +65,9 @@ standard meaning, not any one project's mechanisms.
 7. **Guarantees are liabilities.** Start from what comparable systems promise. Each extra guarantee names
    who relies on it and what it costs; without both, drop it. Do not let a verification method harden into
    a promise, and let review remove requirements as readily as it adds them.
+8. **Theory of Constraints.** Measure where the time goes before acting. A process limit (serial merge, a
+   single lock) is a choice: check established practice first. Gain speed by removing waits, never by
+   dropping acceptance. A rule that keeps being missed becomes a mechanical check, not another clause.
 
 ## Subagents
 

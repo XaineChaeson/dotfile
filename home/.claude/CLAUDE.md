@@ -11,6 +11,8 @@ The instructions shared by every agent live in `~/.agents/AGENTS.md`:
   a checkable result (implementation, refactors, tests, investigations, data runs), spread them across the
   pool so they run in parallel; do not leave an available executor idle while Claude does work it could
   take. Weigh by quota where the owner has stated it. If one cannot run, use another and note it in the report.
+- A brief is a contract: complete cases, the source of expected values, what must not change, a checkable
+  result. A case the contract missed is the design's defect.
 - Keep with Claude the work that needs this conversation's context, cross-piece coordination or judgement
   calls. Verify every delegate's result the same way.
 - Route each piece by its role, then use the role's tier; do not judge per dispatch how hard a piece is, and
