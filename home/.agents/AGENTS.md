@@ -68,6 +68,10 @@ standard meaning, not any one project's mechanisms.
 8. **Theory of Constraints.** Measure where the time goes before acting. A process limit (serial merge, a
    single lock) is a choice: check established practice first. Gain speed by removing waits, never by
    dropping acceptance. A rule that keeps being missed becomes a mechanical check, not another clause.
+9. **Change locality (Open-Closed, Common Closure).** Design the code structure for change, not only for
+   execution: the common kinds of change (a new operator, a new rule) each land in their own file plus one
+   registration line; core modules ask for properties, never for names. Measure it (files touched per kind
+   of change, files co-edited by parallel work) before splitting work, and keep it with a mechanical check.
 
 ## Subagents
 
