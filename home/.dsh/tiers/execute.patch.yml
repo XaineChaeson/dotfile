@@ -1,9 +1,11 @@
 # Execute tier (owner, 2026-11-08): dsh --profile headless --patch ~/.dsh/tiers/execute.patch.yml
 # Implementation and verification with a checkable result. DeepSeek takes only high or max here, so both tiers
 # run at high: the role, not the effort, tells them apart.
-# The only place that sets this tier's model and effort; list models with GET https://api.deepseek.com/models.
+# The only place that sets this tier's model and effort. The model route is the team gateway ty_local (owner, 2026-11-12),
+# defined once per machine in its headless profile (~/.dsh/profiles/headless/cordis.patch.yml); list its models with
+# GET <that baseURL>/models and TYLOCAL_API_KEY.
 - id: agent-default-model
   config:
-    provider: deepseek-official
-    model: deepseek-flash
+    provider: tylocal
+    model: deepseek-v4.1-flash
     reasoningEffort: high
