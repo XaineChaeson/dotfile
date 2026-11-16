@@ -11,12 +11,13 @@ Linux/macOS.
 
 | Live path | What it is |
 | --- | --- |
-| `~/.agents/AGENTS.md` | Global instructions shared by every agent (Claude, Codex, DeepSeek Harness) |
-| `~/.codex/AGENTS.md` | The same file, so Codex reads it too (not stored twice; `setup.sh` links it) |
+| `~/.agents/AGENTS.md` | Global instructions shared by every agent (Claude, Codex, DeepSeek Harness, Antigravity CLI) |
+| `~/.codex/AGENTS.md`, `~/.gemini/AGENTS.md` | The same file, so Codex and the Antigravity CLI read it too (not stored again; `setup.sh` links them) |
 | `~/.claude/CLAUDE.md` | Imports `~/.agents/AGENTS.md` and adds the Claude-only Delegation section |
 | `~/.codex/{decide,execute}.config.toml` | Codex tiers: `codex --profile <tier>` |
 | `~/.claude/tiers/{decide,execute}.json` | Claude tiers: `claude -p --settings ~/.claude/tiers/<tier>.json` |
 | `~/.dsh/tiers/{decide,execute}.patch.yml` | DeepSeek Harness tiers: `dsh --profile headless --patch ~/.dsh/tiers/<tier>.patch.yml` |
+| `~/.gemini/tiers/{decide,execute}.json` | Antigravity CLI tiers: a launcher reads the file and passes its `model` to `agy --model` |
 | `~/.codex/full-access.config.toml` | Explicit Codex permission profile: `codex --profile full-access` |
 | `~/.tmux.conf`, `~/.vimrc`, `~/.bash_aliases` | Shell and editor configs (Linux/macOS) |
 
@@ -27,8 +28,9 @@ commands name only the executor and the tier.
 Codex writes machine state (trusted projects, plugins, UI) into that file. After that the file belongs to the
 machine.
 
-Not here, on purpose: credentials and keys (`~/.dsh/.env`, Codex `auth.json`, Claude `.credentials.json`),
-executor base configs (`~/.codex/config.toml` after seeding, dsh `profiles/`, Claude `settings.json`),
+Not here, on purpose: credentials and keys (`~/.dsh/.env`, Codex `auth.json`, Claude `.credentials.json`, the
+Antigravity CLI sign-in), executor base configs (`~/.codex/config.toml` after seeding, dsh `profiles/`, Claude
+`settings.json`, `~/.gemini/antigravity-cli/settings.json`),
 machine-specific rules such as `~/.claude/rules/`, and skills.
 
 ## Set up a machine

@@ -111,6 +111,9 @@ done < <(git -C "$repo" ls-files -z -- "${roots[@]}")
 # Codex reads ~/.codex/AGENTS.md: the same file as ~/.agents/AGENTS.md.
 link "$HOME/.codex/AGENTS.md" "$repo/home/.agents/AGENTS.md" home/.agents/AGENTS.md
 
+# The Antigravity CLI reads ~/.gemini/AGENTS.md as its global instructions: the same file again.
+link "$HOME/.gemini/AGENTS.md" "$repo/home/.agents/AGENTS.md" home/.agents/AGENTS.md
+
 # Codex also writes machine state (trusted projects, plugins, UI) into config.toml, so it is only seeded.
 seed "$repo/codex/config.portable.toml" "$HOME/.codex/config.toml"
 

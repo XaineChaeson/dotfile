@@ -1,7 +1,7 @@
 # Personal instructions (all agents, all projects, all machines)
 
-Read by Claude (imported from `~/.claude/CLAUDE.md`), Codex (`~/.codex/AGENTS.md` links here) and
-DeepSeek Harness (reads `~/.agents/AGENTS.md`). Its only copy is in the dotfile repository
+Read by Claude (imported from `~/.claude/CLAUDE.md`), Codex (`~/.codex/AGENTS.md` links here), the Antigravity
+CLI (`~/.gemini/AGENTS.md` links here) and DeepSeek Harness (reads `~/.agents/AGENTS.md`). Its only copy is in the dotfile repository
 (GitHub `XaineChaeson/dotfile`); every machine links this path to its clone. Edit and push from the controller
 workstation.
 

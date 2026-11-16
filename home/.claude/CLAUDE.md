@@ -23,13 +23,13 @@ The instructions shared by every agent live in `~/.agents/AGENTS.md`:
   `execute` tier. A root cause nobody has verified is analysis, not implementation. Override a role's tier only
   with a stated reason. When execute-tier output fails review, redo it on the `decide` tier; when decide-tier
   output fails review, stop and bring it to the owner.
-- A dispatch picks a role, an executor and the role's tier. Every executor (Codex, `claude -p`, DeepSeek Harness
-  `dsh`) offers both tiers as a profile named `decide` or `execute` in its own config on the machine where it
-  runs; the launch commands are in the cluster-controller skill. Pick the executor by quota and load: Codex, then
-  `claude -p`, then `dsh`; `dsh` has no quota limit, so bulk execute-tier work can go there directly. Review of
-  every result stays the same whichever executor did the work.
+- A dispatch picks a role, an executor and the role's tier. Every executor (Antigravity CLI `agy`, Codex,
+  `claude -p`, DeepSeek Harness `dsh`) offers both tiers as a profile named `decide` or `execute` in its own config
+  on the machine where it runs; the launch commands are in the cluster-controller skill. Pick the executor by quota
+  and load: `agy`, then Codex, then `claude -p`, then `dsh`; `dsh` has no quota limit, so bulk execute-tier work can
+  go there directly. Review of every result stays the same whichever executor did the work.
 - Rules, skills, briefs and launch scripts name executors and tiers, never models: no `-m`/`--model` flags and no
   model ids. Each tier profile is the one place that sets its model and reasoning effort. Effort belongs to the tier,
   not to the task or the role: more effort is not more ability, and a piece that needs more thought is analysis or
-  review. When you need to know what a tier runs, or what else an executor offers, ask the executor: `codex debug models`, the DeepSeek `/models` API, Claude Code's
+  review. When you need to know what a tier runs, or what else an executor offers, ask the executor: `agy models`, `codex debug models`, the DeepSeek `/models` API, Claude Code's
   `--model` aliases. Changing a tier's model or effort means editing that one profile, nothing else.
