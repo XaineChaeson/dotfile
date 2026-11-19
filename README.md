@@ -13,7 +13,7 @@ Linux/macOS.
 | --- | --- |
 | `~/.agents/AGENTS.md` | Global instructions shared by every agent (Claude, Codex, DeepSeek Harness, Antigravity CLI) |
 | `~/.codex/AGENTS.md`, `~/.gemini/AGENTS.md` | The same file, so Codex and the Antigravity CLI read it too (not stored again; `setup.sh` links them) |
-| `~/.claude/CLAUDE.md` | Imports `~/.agents/AGENTS.md` and adds the Claude-only Delegation section |
+| `~/.claude/CLAUDE.md` | Imports `~/.agents/AGENTS.md` |
 | `~/.codex/{decide,execute}.config.toml` | Codex tiers: `codex --profile <tier>` |
 | `~/.claude/tiers/{decide,execute}.json` | Claude tiers: `claude -p --settings ~/.claude/tiers/<tier>.json` |
 | `~/.dsh/tiers/{decide,execute}.patch.yml` | DeepSeek Harness tiers: `dsh --profile headless --patch ~/.dsh/tiers/<tier>.patch.yml` |

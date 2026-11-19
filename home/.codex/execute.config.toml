@@ -1,4 +1,4 @@
-# Execute tier (owner, 2026-11-08): implementation and verification with a checkable result. Launch with `--profile execute`.
+# Execute tier (owner, 2026-11-19): implementation and verification with a checkable result. Launch with `--profile execute`.
 # This file is the only place that sets this tier's model and reasoning effort; list models with `codex debug models`.
-model = "gpt-6.1-terra"
+model = "gpt-6.2-sol"
 model_reasoning_effort = "medium"
