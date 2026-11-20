@@ -1,4 +1,0 @@
-# Decide tier (owner, 2026-11-19): design, analysis, diagnosis and review. Launch with `--profile decide`.
-# This file is the only place that sets this tier's model and reasoning effort; list models with `codex debug models`.
-model = "gpt-6.2-astra"
-model_reasoning_effort = "high"

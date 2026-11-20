@@ -1,19 +1,20 @@
 # Dotfile
 
-Personal shell/editor setup, portable executor tier profiles, and minimal global agent constitution. Each managed file lives once in this repository; `setup.sh` links it under `$HOME` so there is no second copy to drift.
+Personal shell/editor setup and minimal global agent constitution. Each managed file lives once in this repository; `setup.sh` links it under `$HOME` so there is no second copy to drift.
 
 ## Layout
 
 | Root | Behavior | Contents |
 | --- | --- | --- |
-| `home/` | Linked under `$HOME` on every OS | `~/.agents/AGENTS.md` (also linked to `~/.codex/AGENTS.md`, `~/.gemini/AGENTS.md`, imported by `~/.claude/CLAUDE.md`), portable tier profiles (`~/.claude/tiers/`, `~/.codex/*.config.toml`, `~/.gemini/tiers/`) |
+| `home/` | Linked under `$HOME` on every OS | `~/.agents/AGENTS.md` (also linked to `~/.codex/AGENTS.md`, `~/.gemini/AGENTS.md`, imported by `~/.claude/CLAUDE.md`) |
 | `home-posix/` | Linked under `$HOME` on Linux/macOS | `~/.bash_aliases`, `~/.tmux.conf`, `~/.vimrc` |
 | `seed/` | Copied once if missing, then machine-owned | `~/.codex/config.toml` (Codex writes local trust/plugin/UI state here) |
 
 ### Scope boundary (what does NOT live here)
 
+- **Executor tiers & model routing** (`operate / execute / decide`): single source of truth in Tycho Accounts.
 - **Skills** (`<slug>/SKILL.md`): managed in `XaineChaeson/personal-skills` (personal/home) or company Git (work) and distributed via Tycho Host (`machine_ids`).
-- **Credentials & machine-specific configs**: API keys, `auth.json`, `.credentials.json`, company internal gateways (e.g. `~/.dsh/tiers/` / `~/.dsh/profiles/`), `~/.claude/rules/`, and project-specific rules (managed in Tycho).
+- **Credentials & machine-specific configs**: API keys, `auth.json`, `.credentials.json`, company internal gateways (e.g. `~/.dsh/`), `~/.claude/rules/`, and project-specific rules (managed in Tycho).
 
 ## Set up a machine
 

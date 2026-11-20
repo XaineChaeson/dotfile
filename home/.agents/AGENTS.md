@@ -79,7 +79,6 @@ Applies when coordinating multi-step work interactively; a leaf worker running a
 - A brief is a contract: complete cases, the source of expected values, what must not change, and a checkable result. A case the contract missed is a design defect.
 - Keep cross-piece coordination, conversation context, and judgement calls with the coordinator; verify every delegate's result the same way.
 - Independent review runs read-only in a fresh session without the author's conclusions, preferably on a different executor.
-- Refer to tiers (`decide` / `execute`), not hardcoded model IDs; each tier profile is the single place that configures its model and reasoning effort.
 - Concrete dispatch mechanisms (Tycho tasks, cluster orchestration, or local scripts) belong in their own skills or platforms, not here.
 
 ## Subagents
