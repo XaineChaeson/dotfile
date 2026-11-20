@@ -72,21 +72,6 @@ link() {
   printf '%-8s %s %s\n' "$verb" "$dest" "$note"
 }
 
-# Seed DEST from SRC once; afterwards DEST belongs to the machine.
-seed() {
-  local src="$1" dest="$2"
-  if [[ -e "$dest" ]]; then
-    printf 'KEEP     %s (machine-local)\n' "$dest"
-  elif ((check)); then
-    printf 'TODO     %s  SEED\n' "$dest"
-    problems=$((problems + 1))
-  else
-    mkdir -p "$(dirname "$dest")"
-    cp "$src" "$dest"
-    printf 'SEED     %s\n' "$dest"
-  fi
-}
-
 # Make shell startup file $1 source ~/.bash_aliases.
 source_aliases() {
   local rc="$1" line='[ -f "$HOME/.bash_aliases" ] && . "$HOME/.bash_aliases"'
@@ -113,11 +98,6 @@ link "$HOME/.codex/AGENTS.md" "$repo/home/.agents/AGENTS.md" home/.agents/AGENTS
 
 # The Antigravity CLI reads ~/.gemini/AGENTS.md as its global instructions: the same file again.
 link "$HOME/.gemini/AGENTS.md" "$repo/home/.agents/AGENTS.md" home/.agents/AGENTS.md
-
-# Seed one-time templates under seed/ (e.g. ~/.codex/config.toml): copied once if missing, then machine-owned.
-while IFS= read -r -d '' rel; do
-  seed "$repo/$rel" "$HOME/${rel#*/}"
-done < <(git -C "$repo" ls-files -z -- seed)
 
 # Hook into the first bash startup file that exists, and zsh's; never create one, since a new
 # ~/.bash_profile would stop bash from reading ~/.profile.

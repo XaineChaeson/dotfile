@@ -8,13 +8,12 @@ Personal shell/editor setup and minimal global agent constitution. Each managed 
 | --- | --- | --- |
 | `home/` | Linked under `$HOME` on every OS | `~/.agents/AGENTS.md` (also linked to `~/.codex/AGENTS.md`, `~/.gemini/AGENTS.md`, imported by `~/.claude/CLAUDE.md`) |
 | `home-posix/` | Linked under `$HOME` on Linux/macOS | `~/.bash_aliases`, `~/.tmux.conf`, `~/.vimrc` |
-| `seed/` | Copied once if missing, then machine-owned | `~/.codex/config.toml` (Codex writes local trust/plugin/UI state here) |
 
 ### Scope boundary (what does NOT live here)
 
 - **Executor tiers & model routing** (`operate / execute / decide`): single source of truth in Tycho Accounts.
 - **Skills** (`<slug>/SKILL.md`): managed in `XaineChaeson/personal-skills` (personal/home) or company Git (work) and distributed via Tycho Host (`machine_ids`).
-- **Credentials & machine-specific configs**: API keys, `auth.json`, `.credentials.json`, company internal gateways (e.g. `~/.dsh/`), `~/.claude/rules/`, and project-specific rules (managed in Tycho).
+- **Credentials & machine-specific configs**: API keys, `auth.json`, `.credentials.json`, executor base configs (`~/.codex/config.toml`, `~/.claude/settings.json`, `~/.dsh/`), `~/.claude/rules/`, and project-specific rules (managed in Tycho).
 
 ## Set up a machine
 
@@ -25,7 +24,7 @@ git clone https://github.com/XaineChaeson/dotfile.git ~/code/dotfile
 ~/code/dotfile/setup.sh
 ```
 
-`setup.sh --check` previews changes without modifying files (`OK`, `NEW`, `RELINK`, `SEED`, `KEEP`, `CONFLICT`).
+`setup.sh --check` previews changes without modifying files (`OK`, `NEW`, `RELINK`, `CONFLICT`).
 
 ## Update
 
